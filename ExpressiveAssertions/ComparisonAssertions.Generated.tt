@@ -1,0 +1,70 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Linq.Expressions;
+
+namespace ExpressiveAssertions
+{
+    public static partial class ComparisonAssertions
+    {
+<# var types = new string[] { "uint", "int", "ulong", "long", "string", "short","ushort", "byte", "sbyte", "decimal", "Guid", "DateTime", "TimeSpan", "object" };
+foreach (var type in types) {#>
+		public static void AreEqual(this IAssertionTool tool, Expression<Func<<#=type#>>> expected, Expression<Func<<#=type#>>> actual)
+        {
+            tool.Check(expected, actual, (a, b) => a == b);
+        }
+        public static void AreEqual(this IAssertionTool tool, Expression<Func<<#=type#>>> expected, Expression<Func<<#=type#>>> actual, string msg)
+        {
+            tool.Check(expected, actual, (a, b) => a == b, null, "{0}", msg);
+        }
+        public static void AreEqual(this IAssertionTool tool, Expression<Func<<#=type#>>> expected, Expression<Func<<#=type#>>> actual, string msg, params object[] fmt)
+        {
+            tool.Check(expected, actual, (a, b) => a == b, null, msg, fmt);
+        }
+
+		public static void AreNotEqual(this IAssertionTool tool, Expression<Func<<#=type#>>> expected, Expression<Func<<#=type#>>> actual)
+        {
+            tool.Check(expected, actual, (a, b) => a != b);
+        }
+        public static void AreNotEqual(this IAssertionTool tool, Expression<Func<<#=type#>>> expected, Expression<Func<<#=type#>>> actual, string msg)
+        {
+            tool.Check(expected, actual, (a, b) => a != b, null, "{0}", msg);
+        }
+        public static void AreNotEqual(this IAssertionTool tool, Expression<Func<<#=type#>>> expected, Expression<Func<<#=type#>>> actual, string msg, params object[] fmt)
+        {
+            tool.Check(expected, actual, (a, b) => a != b, null, msg, fmt);
+        }
+<#} #>
+<# var realTypes = new string[] { "decimal", "double", "Single" };
+foreach (var type in realTypes) {#>
+		public static void AreEqual(this IAssertionTool tool, Expression<Func<<#=type#>>> expected, Expression<Func<<#=type#>>> actual, <#=type#> epsilon)
+        {
+            tool.Check(expected, actual, (a, b) => a - b <= epsilon && a - b >= -epsilon);
+        }
+        public static void AreEqual(this IAssertionTool tool, Expression<Func<<#=type#>>> expected, Expression<Func<<#=type#>>> actual, <#=type#> epsilon, string msg)
+        {
+            tool.Check(expected, actual, (a, b) => a - b <= epsilon && a - b >= -epsilon, null, "{0}", msg);
+        }
+        public static void AreEqual(this IAssertionTool tool, Expression<Func<<#=type#>>> expected, Expression<Func<<#=type#>>> actual, <#=type#> epsilon, string msg, params object[] fmt)
+        {
+            tool.Check(expected, actual, (a, b) => a - b <= epsilon && a - b >= -epsilon, null, msg, fmt);
+        }
+		
+		public static void AreNotEqual(this IAssertionTool tool, Expression<Func<<#=type#>>> expected, Expression<Func<<#=type#>>> actual, <#=type#> epsilon)
+        {
+            tool.Check(expected, actual, (a, b) => a - b > epsilon || a - b < -epsilon, null, "with epsilon of {0}", epsilon);
+        }
+        public static void AreNotEqual(this IAssertionTool tool, Expression<Func<<#=type#>>> expected, Expression<Func<<#=type#>>> actual, <#=type#> epsilon, string msg)
+        {
+            tool.Check(expected, actual, (a, b) => a - b > epsilon || a - b < -epsilon, null, "with epsilon of {1} - {0}", msg, epsilon);
+        }
+        public static void AreNotEqual(this IAssertionTool tool, Expression<Func<<#=type#>>> expected, Expression<Func<<#=type#>>> actual, <#=type#> epsilon, string msg, params object[] fmt)
+        {
+            tool.Check(expected, actual, (a, b) => a - b > epsilon || a - b < -epsilon, null, "with epsilon of {1} - {0}", string.Format(msg, fmt), epsilon);
+        }
+<#} #>
+    }
+}
