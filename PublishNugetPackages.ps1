@@ -1,4 +1,4 @@
-param ($solutionDir);
+$solutionDir = split-path $dte.Solution.Properties('Path').Value -parent;
 
 function publish($version, $package) {
 	if (!(test-path $package)) {
@@ -19,7 +19,7 @@ if (!$metadata) {
 
 $version = $metadata.version;
 
-publish $version ('ExpressiveAssertions/ExpressiveAssertions.' + $version + '.nupkg');
-publish $version ('ExpressiveAssertions/ExpressiveAssertions.' + $version + '.symbols.nupkg');
-publish $version ('ExpressiveAssertions.MSTest/ExpressiveAssertions.MSTest.' + $version + '.nupkg');
-publish $version ('ExpressiveAssertions.MSTest/ExpressiveAssertions.MSTest.' + $version + '.symbols.nupkg');
+publish $version (join-path $solutionDir ('ExpressiveAssertions.' + $version + '.nupkg'));
+publish $version (join-path $solutionDir ('ExpressiveAssertions.' + $version + '.symbols.nupkg'));
+publish $version (join-path $solutionDir ('ExpressiveAssertions.MSTest.' + $version + '.nupkg'));
+publish $version (join-path $solutionDir ('ExpressiveAssertions.MSTest.' + $version + '.symbols.nupkg'));
