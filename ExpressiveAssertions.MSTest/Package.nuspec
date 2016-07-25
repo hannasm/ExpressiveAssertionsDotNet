@@ -21,9 +21,9 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\readme.md" target="" />
-    <file src="..\LICENSE" target="" />
-    <file src="..\LICENSE_ExpressionToCode" target="" />
+    <file src="..\readme.md" target="content" />
+    <file src="..\LICENSE_ExpressiveAssertions.md" target="content" />
+    <file src="..\LICENSE_ExpressionToCode.md" target="content" />
     <file src="bin\Release\*.dll" target="lib" />
     <file src="bin\Release\*.pdb" target="lib" />
     <file src="bin\Release\*.xml" target="lib" />
