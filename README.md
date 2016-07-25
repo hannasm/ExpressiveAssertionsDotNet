@@ -1,5 +1,5 @@
 # Versioning
-This is version 0.9.0 of the expressive assertions library
+This is version 0.9.1 of the expressive assertions library
 
 This package is available from nuget at: https://www.nuget.org/packages/ExpressiveAssertions/0.9.1
 
