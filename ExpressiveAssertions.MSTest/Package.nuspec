@@ -5,7 +5,7 @@
     <version>0.9.1</version>
     <authors>hannasm</authors>
     <owners>hannasm</owners>
-    <licenseUrl>https://github.com/hannasm/ExpressiveAssertionsDotnet/blob/master/LICENSE</licenseUrl>
+    <licenseUrl>https://github.com/hannasm/ExpressiveAssertionsDotnet/blob/master/LICENSE_ExpressiveAssertions.md</licenseUrl>
     <projectUrl>https://github.com/hannasm/ExpressiveAssertionsDotnet</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>MSTest Driver for ExpressiveAssertions, a Flexible Assertion Library Leveraging the .NET Expression Tree Syntax</description>

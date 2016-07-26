@@ -10,5 +10,7 @@ namespace ExpressiveAssertions
     {
         void Accept(AssertionFailure failure);
         void Accept(AssertionSuccess assertionSuccess);
+        void Accept(DeclaredFailure failure);
+        void Accept(DeclaredInconclusive inconclusive);
     }
 }

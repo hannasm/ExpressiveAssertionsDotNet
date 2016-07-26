@@ -10,6 +10,18 @@ namespace ExpressiveAssertions.MSTest
 {
     public class MSTestAssertionTool : IAssertionTool
     {
+        public void Accept(DeclaredFailure failure)
+        {
+            var message = ShortAssertionRenderer.Render(failure);
+            throw new Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException(message, failure.CombinedException);
+        }
+
+        public void Accept(DeclaredInconclusive inconclusive)
+        {
+            var message = ShortAssertionRenderer.Render(inconclusive);
+            throw new Microsoft.VisualStudio.TestTools.UnitTesting.AssertInconclusiveException(message, inconclusive.CombinedException);
+        }
+
         public void Accept(AssertionSuccess assertionSuccess)
         {
             var message = ShortAssertionRenderer.Render(assertionSuccess);
