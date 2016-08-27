@@ -62,53 +62,74 @@ namespace ExpressiveAssertions.Rendering
 
         public static string Render(AssertionData data)
         {
-            var replacer = new ExpressionShortener(data.ExpectedReference.Select(p => p.Name).Concat(data.ActualReference.Select(p => p.Name)));
-            var exp = replacer.Replace(data.Assertion);
-
             StringBuilder s = new StringBuilder();
 
-            s.Append("Asserting ");
-            s.Append(ExpressionToCodeLib.ExpressionToCode.ToCode(exp));
+            if (data.Assertion != null)
+            {
+                var replacer = new ExpressionShortener(data.ExpectedReference.Select(p => p.Name).Concat(data.ActualReference.Select(p => p.Name)));
+                var exp = replacer.Replace(data.Assertion);
 
-            var refs = data.ExpectedReference.Zip(data.ExpectedData, (x, y) => new
-            {
-                Parameter = x,
-                Value = y
-            });
-            refs = refs.Concat(data.ActualReference.Zip(data.ActualData, (x, y) => new
-            {
-                Parameter = x,
-                Value = y
-            }));
-            refs = refs.Concat(replacer.Parameters.Zip(replacer.Values, (x, y) => new
-            {
-                Parameter = x,
-                Value = y
-            }));
 
-            if (refs.Any())
-            {
-                string prefix = " with '";
-                foreach (var @ref in refs)
+                s.Append("Asserting ");
+                s.Append(ExpressionToCodeLib.ExpressionToCode.ToCode(exp));
+
+                var refs = data.ExpectedReference.Zip(data.ExpectedData, (x, y) => new
                 {
-                    s.Append(prefix);
-                    s.Append(@ref.Parameter.Name);
-                    s.Append("'= (");
-                    s.Append(@ref.Value.ToString());
-                    s.Append(")");
-                    prefix = " and '";
+                    Parameter = x,
+                    Value = y
+                });
+                refs = refs.Concat(data.ActualReference.Zip(data.ActualData, (x, y) => new
+                {
+                    Parameter = x,
+                    Value = y
+                }));
+                refs = refs.Concat(replacer.Parameters.Zip(replacer.Values, (x, y) => new
+                {
+                    Parameter = x,
+                    Value = y
+                }));
+
+                if (refs.Any())
+                {
+                    string prefix = " with '";
+                    foreach (var @ref in refs)
+                    {
+                        s.Append(prefix);
+                        s.Append(@ref.Parameter.Name);
+                        s.Append("'= (");
+                        s.Append(@ref.Value?.ToString() ?? "null");
+                        s.Append(")");
+                        prefix = " and '";
+                    }
+                    s.Append(".");
                 }
-                s.Append(".");
             }
+
             if (!string.IsNullOrWhiteSpace(data.Message))
             {
                 s.Append(" ");
                 s.AppendFormat(data.Message, data.Format);
             }
 
+            if (data.ContextData != null)
+            {
+                string prefix = " In the context having ";
+
+                foreach (var d in data.ContextData)
+                {
+                    s.Append(prefix);
+                    s.Append(d.Key);
+                    s.Append("' with value '");
+                    s.Append(d.Value);
+                    s.Append("'.");
+
+                    prefix = " ";
+                }
+            }
+
             if (data.CombinedException != null)
             {
-                s.Append(" One or more exceptions were also reported.");
+                s.Append(" One or more exceptions were included.");
             }
 
             return s.ToString();

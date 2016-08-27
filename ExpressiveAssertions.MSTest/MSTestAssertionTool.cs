@@ -31,6 +31,11 @@ namespace ExpressiveAssertions.MSTest
         public void Accept(AssertionFailure failure)
         {
             var message = "Failure " + ShortAssertionRenderer.Render(failure);
+            Debug.WriteLine(message);
+            if (failure.CombinedException != null)
+            {
+                Debug.WriteLine(failure.CombinedException.ToString());
+            }
             throw new Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException(message, failure.CombinedException);
         }
     }

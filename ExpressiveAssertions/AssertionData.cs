@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExpressiveAssertions.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
@@ -8,13 +9,22 @@ using System.Threading.Tasks;
 
 namespace ExpressiveAssertions
 {
-    public class AssertionData
+    public abstract class AssertionData
     {
-        public AssertionData(Expression assertion, ParameterExpression[] expectedReferences, object[] expectedData, ParameterExpression[] actualReferences, object[] actualData, string message, object[] fmt, Exception external, Exception @internal)
+        public AssertionData(Expression assertion, ParameterExpression[] expectedReferences, object[] expectedData, ParameterExpression[] actualReferences, object[] actualData, string message, object[] fmt, Exception external, Exception @internal, IEnumerable<KeyValuePair<string, string>> contextData)
         {
-            Contract.Requires(assertion != null, "assertion != null");
-            Contract.Requires(expectedReferences?.Length == expectedData?.Length, "each expected data point has crresponding reference");
-            Contract.Requires(actualReferences?.Length == actualData?.Length, "each actual data point has crresponding reference");
+            if (expectedReferences != null || expectedData != null)
+            {
+                if (expectedData == null) { throw new ArgumentNullException("expectedData"); }
+                if (expectedReferences == null) { throw new ArgumentNullException("expectedReferences"); }
+                if (expectedData.Length != expectedReferences.Length) { throw new DataMismatchException("expectedData and expectedReferences don't have matching counts"); }
+            }
+            if (actualReferences != null || actualData != null)
+            {
+                if (actualData == null) { throw new ArgumentNullException("actualData"); }
+                if (actualReferences == null) { throw new ArgumentNullException("actualReferences"); }
+                if (actualData.Length != actualReferences.Length) { throw new DataMismatchException("actualData and actualReferences don't have matching counts"); }
+            }
 
             Message = message;
             Format = fmt;
@@ -28,7 +38,10 @@ namespace ExpressiveAssertions
             ExpectedReference = expectedReferences ?? new ParameterExpression[0];
             ActualData = actualData ?? new object[0];
             ActualReference = actualReferences ?? new ParameterExpression[0];
+            ContextData = contextData ?? Enumerable.Empty<KeyValuePair<string, string>>();
         }
+
+        public abstract void Visit(IAssertionTool tool);
 
         public readonly string Message;
         public readonly object[] Format;
@@ -39,6 +52,7 @@ namespace ExpressiveAssertions
         public readonly object[] ActualData;
         public readonly ParameterExpression[] ExpectedReference;
         public readonly ParameterExpression[] ActualReference;
+        public readonly IEnumerable<KeyValuePair<string, string>> ContextData;
 
         public Exception CombinedException
         {

@@ -10,15 +10,15 @@ namespace ExpressiveAssertions.Tests
     [TestClass]
     public class ReadmeExamples
     {
-        IAssertionTool tool = new MSTest.MSTestAssertionTool();
+        IAssertionTool assert = new MSTest.MSTestAssertionTool();
     
         [TestMethod]
         public void Test001()
         {
             int x = 10;
 
-            tool.Assert(() => x == 10); // success
-            tool.Assert(() => x == 20); // failure
+            assert.Check(() => x == 10); // success
+            assert.Check(() => x == 20); // failure
         }
         [TestMethod]
         public void Test002()
@@ -26,8 +26,28 @@ namespace ExpressiveAssertions.Tests
 
             int x = 10;
 
-            tool.Check(() => x, () => 10, (a, b) => a == b); // success 
-            tool.Check(() => x, () => 20, (a, b) => a == b); // success
+            assert.Check(() => x, () => 10, (a, b) => a == b); // success 
+            assert.Check(() => x, () => 20, (a, b) => a == b); // success
+        }
+        [TestMethod]
+        public void Test003()
+        {
+            var data = new[] {
+                new { FieldOne = 10, FieldTwo = 100 },
+                new { FieldOne = 30, FieldTwo = 900 },
+                new { FieldOne = 2, FieldTwo = 4 },
+            };
+
+            using (assert.ContextPush())
+            for (int i = 0; i < data.Length; i++)
+            {
+                assert.ContextSet("index", i.ToString());
+
+                // fieldtwo must be square of fieldone
+                assert.IsTrue(() => data[i].FieldOne * data[i].FieldOne == data[i].FieldTwo);
+                // fieldone must be multiple of 10
+                assert.IsTrue(() => data[i].FieldOne % 10 == 0);
+            }
         }
     }
 }

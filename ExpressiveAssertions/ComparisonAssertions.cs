@@ -12,33 +12,33 @@ namespace ExpressiveAssertions
         public static void AreEqual<T>(this IAssertionTool tool, Expression<Func<T>> expected, Expression<Func<T>> actual)
             where T : class
         {
-            tool.Check(expected, actual, (a, b) => a == b);
+            tool.Check(expected, actual, (a, b) => object.Equals(a, b));
         }
         public static void AreEqual<T>(this IAssertionTool tool, Expression<Func<T>> expected, Expression<Func<T>> actual, string msg)
             where T : class
         {
-            tool.Check(expected, actual, (a, b) => a == b, null, "{0}", msg);
+            tool.Check(expected, actual, (a, b) => object.Equals(a, b), null, "{0}", msg);
         }
         public static void AreEqual<T>(this IAssertionTool tool, Expression<Func<T>> expected, Expression<Func<T>> actual, string msg, params object[] fmt)
             where T : class
         {
-            tool.Check(expected, actual, (a, b) => a == b, null, msg, fmt);
+            tool.Check(expected, actual, (a, b) => object.Equals(a, b), null, msg, fmt);
         }
 
         public static void AreNotEqual<T>(this IAssertionTool tool, Expression<Func<T>> expected, Expression<Func<T>> actual)
             where T : class
         {
-            tool.Check(expected, actual, (a, b) => a != b);
+            tool.Check(expected, actual, (a, b) => !object.Equals(a, b));
         }
         public static void AreNotEqual<T>(this IAssertionTool tool, Expression<Func<T>> expected, Expression<Func<T>> actual, string msg)
             where T : class
         {
-            tool.Check(expected, actual, (a, b) => a != b, null, "{0}", msg);
+            tool.Check(expected, actual, (a, b) => !object.Equals(a, b), null, "{0}", msg);
         }
         public static void AreNotEqual<T>(this IAssertionTool tool, Expression<Func<T>> expected, Expression<Func<T>> actual, string msg, params object[] fmt)
             where T : class
         {
-            tool.Check(expected, actual, (a, b) => a != b, null, msg, fmt);
+            tool.Check(expected, actual, (a, b) => !object.Equals(a, b), null, msg, fmt);
         }
 
         public static void AreSame(this IAssertionTool tool, Expression<Func<object>> expected, Expression<Func<object>> actual)
@@ -71,28 +71,28 @@ namespace ExpressiveAssertions
         public static void AreEqual<T>(this IAssertionTool tool, T expected, Expression<Func<T>> actual)
             where T : class
         {
-            tool.Check(() => expected, actual, (a, b) => a == b);
+            tool.Check(() => expected, actual, (a, b) => object.Equals(a,b));
         }
         public static void AreEqual<T>(this IAssertionTool tool, T expected, Expression<Func<T>> actual, string msg)
             where T : class
         {
-            tool.Check(() => expected, actual, (a, b) => a == b, null, "{0}", msg);
+            tool.Check(() => expected, actual, (a, b) => object.Equals(a, b), null, "{0}", msg);
         }
         public static void AreEqual<T>(this IAssertionTool tool, T expected, Expression<Func<T>> actual, string msg, params object[] fmt)
             where T : class
         {
-            tool.Check(()=>expected, actual, (a, b) => a == b, null, msg, fmt);
+            tool.Check(()=>expected, actual, (a, b) => object.Equals(a, b), null, msg, fmt);
         }
 
         public static void AreNotEqual<T>(this IAssertionTool tool, T expected, Expression<Func<T>> actual)
             where T : class
         {
-            tool.Check(() => expected, actual, (a, b) => a != b);
+            tool.Check(() => expected, actual, (a, b) => !object.Equals(a, b));
         }
         public static void AreNotEqual<T>(this IAssertionTool tool, T expected, Expression<Func<T>> actual, string msg)
             where T : class
         {
-            tool.Check(() => expected, actual, (a, b) => a != b, null, "{0}", msg);
+            tool.Check(() => expected, actual, (a, b) => !object.Equals(a, b), null, "{0}", msg);
         }
         public static void AreNotEqual<T>(this IAssertionTool tool, T expected, Expression<Func<T>> actual, string msg, params object[] fmt)
             where T : class
@@ -130,33 +130,33 @@ namespace ExpressiveAssertions
         public static void AreEqual<T>(this IAssertionTool tool, T expected, T actual)
             where T : class
         {
-            tool.Check(()=>expected, () => actual, (a, b) => a == b);
+            tool.Check(()=>expected, () => actual, (a, b) => object.Equals(a, b));
         }
         public static void AreEqual<T>(this IAssertionTool tool, T expected, T actual, string msg)
             where T : class
         {
-            tool.Check(() => expected, () => actual, (a, b) => a == b, null, "{0}", msg);
+            tool.Check(() => expected, () => actual, (a, b) => object.Equals(a, b), null, "{0}", msg);
         }
         public static void AreEqual<T>(this IAssertionTool tool, T expected, T actual, string msg, params object[] fmt)
             where T : class
         {
-            tool.Check(() => expected, () => actual, (a, b) => a == b, null, msg, fmt);
+            tool.Check(() => expected, () => actual, (a, b) => object.Equals(a, b), null, msg, fmt);
         }
 
         public static void AreNotEqual<T>(this IAssertionTool tool, T expected, T actual)
             where T : class
         {
-            tool.Check(() => expected, () => actual, (a, b) => a != b);
+            tool.Check(() => expected, () => actual, (a, b) => !object.Equals(a, b));
         }
         public static void AreNotEqual<T>(this IAssertionTool tool, T expected, T actual, string msg)
             where T : class
         {
-            tool.Check(() => expected, () => actual, (a, b) => a != b, null, "{0}", msg);
+            tool.Check(() => expected, () => actual, (a, b) => !object.Equals(a, b), null, "{0}", msg);
         }
         public static void AreNotEqual<T>(this IAssertionTool tool, T expected, T actual, string msg, params object[] fmt)
             where T : class
         {
-            tool.Check(() => expected, () => actual, (a, b) => a != b, null, msg, fmt);
+            tool.Check(() => expected, () => actual, (a, b) => !object.Equals(a, b), null, msg, fmt);
         }
 
         public static void AreSame(this IAssertionTool tool, object expected, object actual)
@@ -188,33 +188,33 @@ namespace ExpressiveAssertions
         public static void AreEqual<T>(this IAssertionTool tool, Expression<Func<T>> expected, T actual)
             where T : class
         {
-            tool.Check(expected, () => actual, (a, b) => a == b);
+            tool.Check(expected, () => actual, (a, b) => object.Equals(a, b));
         }
         public static void AreEqual<T>(this IAssertionTool tool, Expression<Func<T>> expected, T actual, string msg)
             where T : class
         {
-            tool.Check(expected, () => actual, (a, b) => a == b, null, "{0}", msg);
+            tool.Check(expected, () => actual, (a, b) => object.Equals(a, b), null, "{0}", msg);
         }
         public static void AreEqual<T>(this IAssertionTool tool, Expression<Func<T>> expected, T actual, string msg, params object[] fmt)
             where T : class
         {
-            tool.Check(expected, () => actual, (a, b) => a == b, null, msg, fmt);
+            tool.Check(expected, () => actual, (a, b) => object.Equals(a, b), null, msg, fmt);
         }
 
         public static void AreNotEqual<T>(this IAssertionTool tool, Expression<Func<T>> expected, T actual)
             where T : class
         {
-            tool.Check(expected, () => actual, (a, b) => a != b);
+            tool.Check(expected, () => actual, (a, b) => !object.Equals(a, b));
         }
         public static void AreNotEqual<T>(this IAssertionTool tool, Expression<Func<T>> expected, T actual, string msg)
             where T : class
         {
-            tool.Check(expected, () => actual, (a, b) => a != b, null, "{0}", msg);
+            tool.Check(expected, () => actual, (a, b) => !object.Equals(a, b), null, "{0}", msg);
         }
         public static void AreNotEqual<T>(this IAssertionTool tool, Expression<Func<T>> expected, T actual, string msg, params object[] fmt)
             where T : class
         {
-            tool.Check(expected, () => actual, (a, b) => a != b, null, msg, fmt);
+            tool.Check(expected, () => actual, (a, b) => !object.Equals(a, b), null, msg, fmt);
         }
 
         public static void AreSame(this IAssertionTool tool, Expression<Func<object>> expected, object actual)

@@ -33,5 +33,30 @@ namespace ExpressiveAssertions
         {
             assert.Check(() => typeof(T), expr, (a, b) => !a.IsAssignableFrom(b.GetType()), null, msg, args);
         }
+
+        public static void IsInstanceOf(this IAssertionTool assert, Type t, Expression<Func<object>> expr)
+        {
+            assert.Check(() => t, expr, (a, b) => a.IsAssignableFrom(b.GetType()));
+        }
+        public static void IsInstanceOf(this IAssertionTool assert, Type t, Expression<Func<object>> expr, string msg)
+        {
+            assert.Check(() => t, expr, (a, b) => a.IsAssignableFrom(b.GetType()), null, "{0}", msg);
+        }
+        public static void IsInstanceOf(this IAssertionTool assert, Type t, Expression<Func<object>> expr, string msg, params object[] args)
+        {
+            assert.Check(() => t, expr, (a, b) => a.IsAssignableFrom(b.GetType()), null, msg, args);
+        }
+        public static void IsNotInstanceOf(this IAssertionTool assert, Type t, Expression<Func<object>> expr)
+        {
+            assert.Check(() => t, expr, (a, b) => !a.IsAssignableFrom(b.GetType()));
+        }
+        public static void IsNotInstanceOf(this IAssertionTool assert, Type t, Expression<Func<object>> expr, string msg)
+        {
+            assert.Check(() => t, expr, (a, b) => !a.IsAssignableFrom(b.GetType()), null, "{0}", msg);
+        }
+        public static void IsNotInstanceOf(this IAssertionTool assert, Type t, Expression<Func<object>> expr, string msg, params object[] args)
+        {
+            assert.Check(() => t, expr, (a, b) => !a.IsAssignableFrom(b.GetType()), null, msg, args);
+        }
     }
 }

@@ -11,11 +11,6 @@ namespace ExpressiveAssertions
 {
     public static class BaseAssertions
     {
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static T a4b1b391224f4a35b33fd876a79ca1fd<T>(string msg) {
-            return default(T);
-        }
-
         static ConditionalWeakTable<IAssertionTool, IExpressionEvaluator> _EVALUATORS = new ConditionalWeakTable<IAssertionTool, IExpressionEvaluator>();
         public static IExpressionEvaluator GetExpressionEvaluator(this IAssertionTool assertTool)
         {
@@ -36,23 +31,23 @@ namespace ExpressiveAssertions
             _EVALUATORS.Add(assertTool, eval);
             return assertTool;
         }
-        public static void Assert(this IAssertionTool assertTool, Expression<Func<bool>> test)
+        public static void Check(this IAssertionTool assertTool, Expression<Func<bool>> test)
         {
-            assertTool.Assert(test, null, null, null);
+            assertTool.Check(test, null, null, null);
         }
-        public static void Assert(this IAssertionTool assertTool, Expression<Func<bool>> test, Exception exc)
+        public static void Check(this IAssertionTool assertTool, Expression<Func<bool>> test, Exception exc)
         {
-            assertTool.Assert(test, exc, null);
+            assertTool.Check(test, exc, null);
         }
-        public static void Assert(this IAssertionTool assertTool, Expression<Func<bool>> test, string msg)
+        public static void Check(this IAssertionTool assertTool, Expression<Func<bool>> test, string msg)
         {
-            assertTool.Assert(test, null, "{0}", msg);
+            assertTool.Check(test, null, "{0}", msg);
         }
-        public static void Assert(this IAssertionTool assertTool, Expression<Func<bool>> test, string msg, params object[] fmt)
+        public static void Check(this IAssertionTool assertTool, Expression<Func<bool>> test, string msg, params object[] fmt)
         {
-            assertTool.Assert(test, null, msg, fmt);
+            assertTool.Check(test, null, msg, fmt);
         }
-        public static void Assert(this IAssertionTool assertTool, Expression<Func<bool>> test, Exception exc, string message, params object[] fmt)
+        public static void Check(this IAssertionTool assertTool, Expression<Func<bool>> test, Exception exc, string message, params object[] fmt)
         {
             if (fmt == null) { fmt = new object[] { }; }
             if (fmt.Length <= 0)
@@ -74,11 +69,11 @@ namespace ExpressiveAssertions
 
             if (!result)
             {
-                assertTool.Accept(new AssertionFailure(test.Body, null, null, null, null, message, fmt, exc, internalError));
+                assertTool.Accept(new AssertionFailure(test.Body, null, null, null, null, message, fmt, exc, internalError, assertTool.GetContextData()));
             }
             else
             {
-                assertTool.Accept(new AssertionSuccess(test.Body, null, null, null, null, message, fmt, exc, internalError));
+                assertTool.Accept(new AssertionSuccess(test.Body, null, null, null, null, message, fmt, exc, internalError, assertTool.GetContextData()));
             }
         }
 
@@ -133,11 +128,11 @@ namespace ExpressiveAssertions
 
             if (!result)
             {
-                assertTool.Accept(new AssertionFailure(test.Body, expectedRefs, expectedVals, actualRefs, actualVals, message, fmt, exc, internalError));
+                assertTool.Accept(new AssertionFailure(test.Body, expectedRefs, expectedVals, actualRefs, actualVals, message, fmt, exc, internalError, assertTool.GetContextData()));
             }
             else
             {
-                assertTool.Accept(new AssertionSuccess(test.Body, expectedRefs, expectedVals, actualRefs, actualVals, message, fmt, exc, internalError));
+                assertTool.Accept(new AssertionSuccess(test.Body, expectedRefs, expectedVals, actualRefs, actualVals, message, fmt, exc, internalError, assertTool.GetContextData()));
             }
         }
     }
