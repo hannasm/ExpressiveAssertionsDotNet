@@ -1,6 +1,7 @@
 <solution>
-  <version>0.9.3</version>
+  <version>0.9.4</version>
   <releaseNotes>
+    * 0.9.4 - fixed another nuget packaging bug
     * 0.9.3 - added some tests on the base assertions
     * 0.9.3 - refactored a number of specialized / internally focused classes to separate namespaces to limit clutter in the primary namespace
     * 0.9.3 - cleaned up some documentation in README.md

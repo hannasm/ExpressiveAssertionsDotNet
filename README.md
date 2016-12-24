@@ -1,9 +1,9 @@
 # Versioning
-This is version 0.9.3 of the expressive assertions library
+This is version 0.9.4 of the expressive assertions library
 
-This package is available from nuget at: https://www.nuget.org/packages/ExpressiveAssertions/0.9.3
+This package is available from nuget at: https://www.nuget.org/packages/ExpressiveAssertions/0.9.4
 
-The source for this release is available on github at: https://github.com/hannasm/ExpressiveAssertionsDotNet/releases/tag/0.9.3
+The source for this release is available on github at: https://github.com/hannasm/ExpressiveAssertionsDotNet/releases/tag/0.9.4
 
 # ExpressiveAssertionsDotNet
 Flexible Assertion Library Leveraging the .NET Expression Tree Syntax. This library attempts to provide a robust, open
@@ -151,6 +151,9 @@ This code is released on under an MIT license.
 This code uses parts of ExpressionToCode which is licensed under the Apache license. A copy of this license is included.
 
 # Changelog
+
+## 0.9.4
+    * 0.9.4 - fixed another nuget packaging bug
 
 ## 0.9.3
     * 0.9.3 - added some tests on the base assertions
