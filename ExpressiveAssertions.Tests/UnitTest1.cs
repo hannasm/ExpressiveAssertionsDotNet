@@ -12,7 +12,7 @@ namespace ExpressiveAssertions.Tests
         [TestInitialize]
         public void Init()
         {
-            _assert = new MSTest.MSTestAssertionTool();
+            _assert = ExpressiveAssertions.MSTest.MSTestAssertionTool.Create();
         }
 
         [TestMethod]

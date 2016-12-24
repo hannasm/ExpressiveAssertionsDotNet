@@ -1,4 +1,5 @@
-﻿using ExpressiveAssertions.Rendering;
+﻿using ExpressiveAssertions.Data;
+using ExpressiveAssertions.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,27 +11,31 @@ namespace ExpressiveAssertions.MSTest
 {
     public class MSTestAssertionTool : IAssertionTool
     {
+        MSTestAssertionTool() { }
+
+        public static IAssertionTool Create()
+        {
+            return new MSTestAssertionTool();
+        }
+
         public void Accept(DeclaredFailure failure)
         {
-            var message = ShortAssertionRenderer.Render(failure);
-            throw new Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException(message, failure.CombinedException);
+            throw new Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException(failure.Message, failure.CombinedException);
         }
 
         public void Accept(DeclaredInconclusive inconclusive)
         {
-            var message = ShortAssertionRenderer.Render(inconclusive);
-            throw new Microsoft.VisualStudio.TestTools.UnitTesting.AssertInconclusiveException(message, inconclusive.CombinedException);
+            throw new Microsoft.VisualStudio.TestTools.UnitTesting.AssertInconclusiveException(inconclusive.Message, inconclusive.CombinedException);
         }
 
         public void Accept(AssertionSuccess assertionSuccess)
         {
-            var message = ShortAssertionRenderer.Render(assertionSuccess);
-            Debug.WriteLine("Success " + message);
+            Debug.WriteLine("Assert Succeeded - " + assertionSuccess.Message);
         }
 
         public void Accept(AssertionFailure failure)
         {
-            var message = "Failure " + ShortAssertionRenderer.Render(failure);
+            var message = "Assert Failure - " + failure.Message;
             Debug.WriteLine(message);
             if (failure.CombinedException != null)
             {

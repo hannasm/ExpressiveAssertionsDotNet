@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ExpressiveAssertions.Data;
+using ExpressiveAssertions.ExpressionEvaluator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -42,11 +44,11 @@ namespace ExpressiveAssertions
 
             if (internalError is T)
             {
-                assertTool.Accept(new AssertionSuccess(test.Body, null, null, null, null, message, fmt, exc, internalError, assertTool.GetContextData()));
+                assertTool.Accept(new AssertionSuccess(test.Body, null, null, null, null, message, fmt, exc, internalError, assertTool.ContextGetData()));
             }
             else
             {
-                assertTool.Accept(new AssertionFailure(test.Body, null, null, null, null, message, fmt, exc, internalError, assertTool.GetContextData()));
+                assertTool.Accept(new AssertionFailure(test.Body, null, null, null, null, message, fmt, exc, internalError, assertTool.ContextGetData()));
             }
         }
 
@@ -83,11 +85,11 @@ namespace ExpressiveAssertions
 
             if (internalError is T)
             {
-                assertTool.Accept(new AssertionSuccess(test.Body, null, null, null, null, message, fmt, exc, internalError, assertTool.GetContextData()));
+                assertTool.Accept(new AssertionSuccess(test.Body, null, null, null, null, message, fmt, exc, internalError, assertTool.ContextGetData()));
             }
             else
             {
-                assertTool.Accept(new AssertionFailure(test.Body, null, null, null, null, message, fmt, exc, internalError, assertTool.GetContextData()));
+                assertTool.Accept(new AssertionFailure(test.Body, null, null, null, null, message, fmt, exc, internalError, assertTool.ContextGetData()));
             }
         }
     }

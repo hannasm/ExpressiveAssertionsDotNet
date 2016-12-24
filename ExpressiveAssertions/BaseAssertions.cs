@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ExpressiveAssertions.Data;
+using ExpressiveAssertions.ExpressionEvaluator;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,26 +13,6 @@ namespace ExpressiveAssertions
 {
     public static class BaseAssertions
     {
-        static ConditionalWeakTable<IAssertionTool, IExpressionEvaluator> _EVALUATORS = new ConditionalWeakTable<IAssertionTool, IExpressionEvaluator>();
-        public static IExpressionEvaluator GetExpressionEvaluator(this IAssertionTool assertTool)
-        {
-            IExpressionEvaluator result;
-            if (!_EVALUATORS.TryGetValue(assertTool, out result))
-            {
-                _EVALUATORS.Add(assertTool, result = new DefaultEvaluator());
-            }
-            return result;
-        }
-        public static IAssertionTool SetExpressionEvaluator(this IAssertionTool assertTool, IExpressionEvaluator eval)
-        {
-            IExpressionEvaluator tmp;
-            if (_EVALUATORS.TryGetValue(assertTool, out tmp))
-            {
-                _EVALUATORS.Remove(assertTool);
-            }
-            _EVALUATORS.Add(assertTool, eval);
-            return assertTool;
-        }
         public static void Check(this IAssertionTool assertTool, Expression<Func<bool>> test)
         {
             assertTool.Check(test, null, null, null);
@@ -69,11 +51,11 @@ namespace ExpressiveAssertions
 
             if (!result)
             {
-                assertTool.Accept(new AssertionFailure(test.Body, null, null, null, null, message, fmt, exc, internalError, assertTool.GetContextData()));
+                assertTool.Accept(new AssertionFailure(test.Body, null, null, null, null, message, fmt, exc, internalError, assertTool.ContextGetData()));
             }
             else
             {
-                assertTool.Accept(new AssertionSuccess(test.Body, null, null, null, null, message, fmt, exc, internalError, assertTool.GetContextData()));
+                assertTool.Accept(new AssertionSuccess(test.Body, null, null, null, null, message, fmt, exc, internalError, assertTool.ContextGetData()));
             }
         }
 
@@ -128,11 +110,11 @@ namespace ExpressiveAssertions
 
             if (!result)
             {
-                assertTool.Accept(new AssertionFailure(test.Body, expectedRefs, expectedVals, actualRefs, actualVals, message, fmt, exc, internalError, assertTool.GetContextData()));
+                assertTool.Accept(new AssertionFailure(test.Body, expectedRefs, expectedVals, actualRefs, actualVals, message, fmt, exc, internalError, assertTool.ContextGetData()));
             }
             else
             {
-                assertTool.Accept(new AssertionSuccess(test.Body, expectedRefs, expectedVals, actualRefs, actualVals, message, fmt, exc, internalError, assertTool.GetContextData()));
+                assertTool.Accept(new AssertionSuccess(test.Body, expectedRefs, expectedVals, actualRefs, actualVals, message, fmt, exc, internalError, assertTool.ContextGetData()));
             }
         }
     }

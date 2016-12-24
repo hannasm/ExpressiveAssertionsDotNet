@@ -51,6 +51,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AssertionContextTests.cs" />
+    <Compile Include="BaseAssertionTests.cs" />
+    <Compile Include="IntrospectiveAssertionTool.cs" />
     <Compile Include="ReadmeExamples.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

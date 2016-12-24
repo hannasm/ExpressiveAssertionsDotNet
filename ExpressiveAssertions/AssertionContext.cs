@@ -10,9 +10,9 @@ namespace ExpressiveAssertions
 {
     public class AssertionContext : IAssertionContext
     {
-        Stack<HashSet<KeyValuePair<string, string>>> _data = new Stack<HashSet<KeyValuePair<string, string>>>();
-        HashSet<Scope> _scopes = new HashSet<Scope>();
-        Dictionary<HashSet<KeyValuePair<string, string>>, Scope> _scopeMap = new Dictionary<HashSet<KeyValuePair<string, string>>, Scope>();
+        readonly Stack<HashSet<KeyValuePair<string, string>>> _data = new Stack<HashSet<KeyValuePair<string, string>>>();
+        readonly HashSet<Scope> _scopes = new HashSet<Scope>();
+        readonly Dictionary<HashSet<KeyValuePair<string, string>>, Scope> _scopeMap = new Dictionary<HashSet<KeyValuePair<string, string>>, Scope>();
 
         public AssertionContext()
         {
@@ -26,8 +26,8 @@ namespace ExpressiveAssertions
                 _parent = parent;
                 _target = target;
             }
-            AssertionContext _parent;
-            HashSet<KeyValuePair<string, string>> _target;
+            readonly AssertionContext _parent;
+            readonly HashSet<KeyValuePair<string, string>> _target;
             public void Dispose()
             {
                 if (!_parent._scopes.Contains(this)) { return; } // generate some sort of warning maybe?

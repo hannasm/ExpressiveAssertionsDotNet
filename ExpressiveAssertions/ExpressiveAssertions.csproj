@@ -101,15 +101,17 @@
     </Compile>
     <Compile Include="AssertionContext.cs" />
     <Compile Include="AssertionContextExtensions.cs" />
-    <Compile Include="AssertionData.cs" />
-    <Compile Include="AssertionFailure.cs" />
-    <Compile Include="AssertionSuccess.cs" />
+    <Compile Include="Data\AssertionData.cs" />
+    <Compile Include="Data\AssertionFailure.cs" />
+    <Compile Include="Data\AssertionSuccess.cs" />
     <Compile Include="BaseAssertions.cs" />
     <Compile Include="CollectionAssertions.cs" />
     <Compile Include="ExceptionHandlingAssertions.cs" />
     <Compile Include="Exceptions\DataMismatchException.cs" />
     <Compile Include="Exceptions\StateException.cs" />
-    <Compile Include="SoftAssertionTool.cs" />
+    <Compile Include="ExpressionEvaluator\ExpressionEvaluatorExtensions.cs" />
+    <Compile Include="Tooling\ShortAssertionRendererTool.cs" />
+    <Compile Include="Tooling\SoftAssertionTool.cs" />
     <Compile Include="UnSortedCollectionAssertions.cs" />
     <Compile Include="SortedCollectionAssertions.cs" />
     <Compile Include="ComparisonAssertions.cs" />
@@ -119,13 +121,13 @@
       <DependentUpon>ComparisonAssertions.Generated.tt</DependentUpon>
     </Compile>
     <Compile Include="DeclarativeAssertions.cs" />
-    <Compile Include="DeclaredFailure.cs" />
-    <Compile Include="DeclaredInconclusive.cs" />
-    <Compile Include="DefaultEvaluator.cs" />
+    <Compile Include="Data\DeclaredFailure.cs" />
+    <Compile Include="Data\DeclaredInconclusive.cs" />
+    <Compile Include="ExpressionEvaluator\DefaultEvaluator.cs" />
     <Compile Include="IAssertionContext.cs" />
     <Compile Include="IAssertionTool.cs" />
-    <Compile Include="IExpressionEvaluator.cs" />
-    <Compile Include="IncompleteAssertionException.cs" />
+    <Compile Include="ExpressionEvaluator\IExpressionEvaluator.cs" />
+    <Compile Include="Exceptions\IncompleteAssertionException.cs" />
     <Compile Include="NullAssertions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\ShortAssertionRenderer.cs" />

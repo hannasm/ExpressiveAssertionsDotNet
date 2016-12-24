@@ -11,16 +11,16 @@ namespace ExpressiveAssertions
     {
         public static IDisposable ContextPush(this IAssertionTool assert)
         {
-            return assert.GetAssertionContext().Push();
+            return assert.ContextGet().Push();
         }
         public static IAssertionTool ContextSet(this IAssertionTool assert, string key, string value)
         {
-            assert.GetAssertionContext().Set(key, value);
+            assert.ContextGet().Set(key, value);
             return assert;
         }
 
         static ConditionalWeakTable<IAssertionTool, IAssertionContext> _CONTEXT = new ConditionalWeakTable<IAssertionTool, IAssertionContext>();
-        public static IAssertionContext GetAssertionContext(this IAssertionTool assertTool)
+        public static IAssertionContext ContextGet(this IAssertionTool assertTool)
         {
             IAssertionContext result;
             if (!_CONTEXT.TryGetValue(assertTool, out result))
@@ -29,7 +29,7 @@ namespace ExpressiveAssertions
             }
             return result;
         }
-        public static IAssertionTool SetAssertionContext(this IAssertionTool assertTool, IAssertionContext ctx)
+        public static IAssertionTool ContextSet(this IAssertionTool assertTool, IAssertionContext ctx)
         {
             IAssertionContext tmp;
             if (_CONTEXT.TryGetValue(assertTool, out tmp))
@@ -39,7 +39,7 @@ namespace ExpressiveAssertions
             _CONTEXT.Add(assertTool, ctx);
             return assertTool;
         }
-        public static IEnumerable<KeyValuePair<string, string>> GetContextData(this IAssertionTool assertTool) { return GetAssertionContext(assertTool).GetData(); }
+        public static IEnumerable<KeyValuePair<string, string>> ContextGetData(this IAssertionTool assertTool) { return ContextGet(assertTool).GetData(); }
 
     }
 }

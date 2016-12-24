@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExpressiveAssertions.ExpressionEvaluator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -126,7 +127,7 @@ namespace ExpressiveAssertions
             }
 
             var evaluator = assertTool.GetExpressionEvaluator();
-            var context = assertTool.GetAssertionContext();
+            var context = assertTool.ContextGet();
 
             var expected = evaluator.Eval(expectedExp);
             var actual = evaluator.Eval(actualExp);

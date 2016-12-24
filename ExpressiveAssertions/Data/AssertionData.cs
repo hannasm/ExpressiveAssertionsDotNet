@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExpressiveAssertions
+namespace ExpressiveAssertions.Data
 {
     public abstract class AssertionData
     {
@@ -27,7 +27,7 @@ namespace ExpressiveAssertions
             }
 
             Message = message;
-            Format = fmt;
+            Format = fmt ?? new object[0];
             ExternalException = external;
             if (@internal != null)
             {

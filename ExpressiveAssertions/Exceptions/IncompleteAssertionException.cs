@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExpressiveAssertions
+namespace ExpressiveAssertions.Exceptions
 {
     public class IncompleteAssertionException : Exception
     {

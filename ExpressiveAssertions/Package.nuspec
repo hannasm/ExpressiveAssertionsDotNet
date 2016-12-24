@@ -1,8 +1,8 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
   <metadata>
     <id>ExpressiveAssertions</id>
-    <version>0.9.2</version>
+    <version>0.9.3</version>
     <authors>hannasm</authors>
     <owners>hannasm</owners>
     <licenseUrl>https://github.com/hannasm/ExpressiveAssertionsDotnet/blob/master/LICENSE_ExpressiveAssertions.md</licenseUrl>
@@ -10,6 +10,11 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Flexible Assertion Library Leveraging the .NET Expression Tree Syntax</description>
     <releaseNotes>
+    * 0.9.3 - added some tests on the base assertions
+    * 0.9.3 - refactored a number of specialized / internally focused classes to separate namespaces to limit clutter in the primary namespace
+    * 0.9.3 - cleaned up some documentation in README.md
+    * 0.9.3 - nuget package now qualifies the readme as README_ExpressiveAssertions.md instead of just README.md
+    * 0.9.3 - MSTest assertion no longer renders assertions automatically, you must specifically chain it with a renderer assertion (such as the builtin ShortAssertionRendererTool)
     * 0.9.2 - better error reporting in the mstest driver
     * 0.9.2 - started removing code contracts stuff because they don't report error messages the way i want
     * 0.9.2 - Renamed the Assert() method to be just another overload of Check() instead
@@ -28,7 +33,7 @@
     <copyright>Copyright 2016</copyright>
   </metadata>
   <files>
-    <file src="..\readme.md" target="content" />
+    <file src="..\readme.md" target="content\README_ExpressiveAssertions.md" />
     <file src="..\LICENSE_ExpressiveAssertions.md" target="content" />
     <file src="..\LICENSE_ExpressionToCode.md" target="content" />
     <file src="bin\Release\*.dll" target="lib" />

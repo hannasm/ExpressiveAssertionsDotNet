@@ -1,6 +1,11 @@
 <solution>
-  <version>0.9.2</version>
+  <version>0.9.3</version>
   <releaseNotes>
+    * 0.9.3 - added some tests on the base assertions
+    * 0.9.3 - refactored a number of specialized / internally focused classes to separate namespaces to limit clutter in the primary namespace
+    * 0.9.3 - cleaned up some documentation in README.md
+    * 0.9.3 - nuget package now qualifies the readme as README_ExpressiveAssertions.md instead of just README.md
+    * 0.9.3 - MSTest assertion no longer renders assertions automatically, you must specifically chain it with a renderer assertion (such as the builtin ShortAssertionRendererTool)
     * 0.9.2 - better error reporting in the mstest driver
     * 0.9.2 - started removing code contracts stuff because they don't report error messages the way i want
     * 0.9.2 - Renamed the Assert() method to be just another overload of Check() instead

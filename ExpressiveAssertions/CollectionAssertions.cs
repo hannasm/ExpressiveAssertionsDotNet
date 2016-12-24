@@ -1,4 +1,5 @@
-﻿using ExpressiveExpressionTrees;
+﻿using ExpressiveAssertions.ExpressionEvaluator;
+using ExpressiveExpressionTrees;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,7 +69,7 @@ namespace ExpressiveAssertions
             }
 
             var evaluator = assertTool.GetExpressionEvaluator();
-            var context = assertTool.GetAssertionContext();
+            var context = assertTool.ContextGet();
 
             using (context.Push())
             {

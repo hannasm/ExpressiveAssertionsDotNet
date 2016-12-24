@@ -45,7 +45,13 @@ if ($data.package.metadata.dependencies) {
 
 if ($updated) {
 	write-host ('updating nuget package for ' + $sai + ' from metadata');
-	$data.Save($sai);
+	
+	$settings = new-object System.Xml.XmlWriterSettings;
+	$settings.NewLineChars = "`r`n";
+	$settings.Indent = $true;
+	$writer = [System.Xml.XmlWriter]::Create($sai, $settings);
+	$data.Save($writer);
+	$writer.Dispose();
 } else {
 	write-host ('no update to nuget package ' + $sai + ' required...');
 }

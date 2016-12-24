@@ -10,7 +10,9 @@ namespace ExpressiveAssertions.Tests
     [TestClass]
     public class ReadmeExamples
     {
-        IAssertionTool assert = new MSTest.MSTestAssertionTool();
+        IAssertionTool assert = ExpressiveAssertions.Tooling.ShortAssertionRendererTool.Create(
+            ExpressiveAssertions.MSTest.MSTestAssertionTool.Create()
+        );
     
         [TestMethod]
         public void Test001()

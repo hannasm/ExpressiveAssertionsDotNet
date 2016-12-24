@@ -11,7 +11,7 @@ namespace ExpressiveAssertions.Tests
     [TestClass]
     public class AssertionContextTests
     {
-        IAssertionTool assert = new MSTest.MSTestAssertionTool();
+        IAssertionTool assert = ExpressiveAssertions.MSTest.MSTestAssertionTool.Create();
 
         [TestMethod]
         public void Test001()
@@ -41,6 +41,20 @@ namespace ExpressiveAssertions.Tests
                 Key = "Depth 0 - abc",
                 Value = "def"
             }, () => values.Select(kvp => new
+            {
+                Key = kvp.Key,
+                Value = kvp.Value
+            }).Single());
+
+            ac.Set("abc", "ghi");
+
+            var values2 = ac.GetData();
+            assert.AreEqual(1, () => values2.Count());
+            assert.AreEqual(new
+            {
+                Key = "Depth 0 - abc",
+                Value = "ghi"
+            }, () => values2.Select(kvp => new
             {
                 Key = kvp.Key,
                 Value = kvp.Value
