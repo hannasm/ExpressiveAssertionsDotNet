@@ -1,6 +1,7 @@
 <solution>
-  <version>0.9.5</version>
+  <version>0.9.6</version>
   <releaseNotes>
+    * 0.9.6 - fix bug with mstest handling of assertion messages
     * 0.9.5 - fix bug in short assertion renderer causing all failed assertions to be marked as success
     * 0.9.4 - fixed another nuget packaging bug
     * 0.9.3 - added some tests on the base assertions

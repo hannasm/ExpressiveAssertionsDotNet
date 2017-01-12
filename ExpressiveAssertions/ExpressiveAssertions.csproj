@@ -73,6 +73,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ExpressionToCodeLib, Version=1.5.4.0, Culture=neutral, PublicKeyToken=b43a6eb33831e563, processorArchitecture=MSIL">
       <HintPath>..\packages\ExpressionToCodeLib.1.5.4.0\lib\net40-Client\ExpressionToCodeLib.dll</HintPath>
@@ -163,8 +166,8 @@ move "$(TargetDir)tmp\$(TargetName).pdb" "$(TargetDir)$(TargetName).pdb"
 rmdir "$(TargetDir)tmp"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>powershell -NoLogo -NonInteractive -ExecutionPolicy Unrestricted -Command "$(SolutionDir)GenerateAssemblyInfo.ps1 '$(SolutionDir)'"
-powershell -NoLogo -NonInteractive -ExecutionPolicy Unrestricted -Command "$(SolutionDir)UpdateNugetPackageIfNeeded.ps1  '$(SolutionDir)' '$(ProjectDir)'"</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

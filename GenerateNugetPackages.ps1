@@ -1,3 +1,9 @@
+$scriptPath = split-path $SCRIPT:MyInvocation.MyCommand.Path -parent;
+& (join-path $scriptPath 'GenerateAssemblyInfo.ps1') $scriptPath;
+
+& (join-path $scriptPath 'UpdateNugetPackageIfNeeded.ps1') $scriptPath (join-path $scriptPath 'ExpressiveAssertions')
+& (join-path $scriptPath 'UpdateNugetPackageIfNeeded.ps1') $scriptPath (join-path $scriptPath 'ExpressiveAssertions.MSTest')
+
 if (!(get-command 'Get-Project' -errorAction SilentlyContinue)) {
 	throw ('this script is intended to be run from the nuget package manager console inside visual studio which has access to visual studio DTE');
 }
