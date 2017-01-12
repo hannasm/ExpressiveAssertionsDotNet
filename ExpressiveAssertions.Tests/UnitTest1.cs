@@ -70,5 +70,13 @@ namespace ExpressiveAssertions.Tests
             t.Visit(v);
         }
 
+        [TestMethod]
+        public void Test005()
+        {
+            IAssertionTool _backingAssert = ExpressiveAssertions.Tooling.ShortAssertionRendererTool.Create(
+               ExpressiveAssertions.MSTest.MSTestAssertionTool.Create()
+            );
+            _backingAssert.AreEqual("a", "a\0");
+        }
     }
 }
