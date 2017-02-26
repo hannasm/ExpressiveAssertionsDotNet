@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>ExpressiveAssertions</id>
-    <version>0.9.6</version>
+    <version>0.9.7</version>
     <authors>hannasm</authors>
     <owners>hannasm</owners>
     <licenseUrl>https://github.com/hannasm/ExpressiveAssertionsDotnet/blob/master/LICENSE_ExpressiveAssertions.md</licenseUrl>
@@ -10,6 +10,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Flexible Assertion Library Leveraging the .NET Expression Tree Syntax</description>
     <releaseNotes>
+    * 0.9.7 - addition of AssertionInverterTool to treat all success as failure and all failure as success
+    * 0.9.7 - addition of IgnoreDeclaredFailureAssertionTool which will ignore any declared failure assertions
+    * 0.9.7 - addition of IgnoreInconclsuiveAssertionTool which will ignore any inconclusive assertions
     * 0.9.6 - fix bug with mstest handling of assertion messages
     * 0.9.5 - fix bug in short assertion renderer causing all failed assertions to be marked as success
     * 0.9.4 - fixed another nuget packaging bug

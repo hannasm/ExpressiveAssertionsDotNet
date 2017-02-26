@@ -1,9 +1,9 @@
 # Versioning
-This is version 0.9.6 of the expressive assertions library
+This is version 0.9.7 of the expressive assertions library
 
-This package is available from nuget at: https://www.nuget.org/packages/ExpressiveAssertions/0.9.6
+This package is available from nuget at: https://www.nuget.org/packages/ExpressiveAssertions/0.9.7
 
-The source for this release is available on github at: https://github.com/hannasm/ExpressiveAssertionsDotNet/releases/tag/0.9.6
+The source for this release is available on github at: https://github.com/hannasm/ExpressiveAssertionsDotNet/releases/tag/0.9.7
 
 # ExpressiveAssertionsDotNet
 Flexible Assertion Library Leveraging the .NET Expression Tree Syntax. This library attempts to provide a robust, open
@@ -151,6 +151,11 @@ This code is released on under an MIT license.
 This code uses parts of ExpressionToCode which is licensed under the Apache license. A copy of this license is included.
 
 # Changelog
+
+## 0.9.7
+    * 0.9.7 - addition of AssertionInverterTool to treat all success as failure and all failure as success
+	* 0.9.7 - addition of IgnoreDeclaredFailureAssertionTool which will ignore any declared failure assertions
+	* 0.9.7 - addition of IgnoreInconclsuiveAssertionTool which will ignore any inconclusive assertions
 
 ## 0.9.6
     * 0.9.6 - fix bug with mstest handling of assertion messages

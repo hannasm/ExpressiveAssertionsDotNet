@@ -113,6 +113,9 @@
     <Compile Include="Exceptions\DataMismatchException.cs" />
     <Compile Include="Exceptions\StateException.cs" />
     <Compile Include="ExpressionEvaluator\ExpressionEvaluatorExtensions.cs" />
+    <Compile Include="Tooling\AssertionInverterTool.cs" />
+    <Compile Include="Tooling\IgnoreDeclaredFailureAssertionTool.cs" />
+    <Compile Include="Tooling\IgnoreInconclusiveAssertionTool.cs" />
     <Compile Include="Tooling\ShortAssertionRendererTool.cs" />
     <Compile Include="Tooling\SoftAssertionTool.cs" />
     <Compile Include="UnSortedCollectionAssertions.cs" />
