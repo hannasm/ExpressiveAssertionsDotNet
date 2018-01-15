@@ -14,7 +14,6 @@
 </version>
 <releaseNotes>
 * 0.9.8 - upgrade to netstandard 2.0
-* 0.9.8 - rewrite context code to use AsyncLocal instead of CallContext (required for net standard 2.0 upgrade)
 * 0.9.7 - addition of AssertionInverterTool to treat all success as failure and all failure as success
 * 0.9.7 - addition of IgnoreDeclaredFailureAssertionTool which will ignore any declared failure assertions
 * 0.9.7 - addition of IgnoreInconclsuiveAssertionTool which will ignore any inconclusive assertions
