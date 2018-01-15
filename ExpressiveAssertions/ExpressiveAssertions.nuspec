@@ -40,6 +40,13 @@
 * 0.9.1 - add license files to nuget package
 * 0.9.0 - this is the initial release, and is a beta / alpha version with some incomplete / missing features
 </releaseNotes>
+<dependencies>
+<group>
+<dependency id="ExpressionToCodeLib" version="[2.0,3.0)" />
+<dependency id="ExpressiveExpressionTrees" version="[2.0,3.0)" />
+<dependency id="ExpressiveReflection" version="[2.0,3.0)" />
+</group>
+</dependencies>
 </metadata>
 <files>
 <file src="../readme.md" target="content/README_ExpressiveAssertions.md" />
