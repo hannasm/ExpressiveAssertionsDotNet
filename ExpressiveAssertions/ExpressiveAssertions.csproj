@@ -1,182 +1,113 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{524F7A5F-29ED-4E6A-97DF-90E9EC9D15C2}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExpressiveAssertions</RootNamespace>
-    <AssemblyName>ExpressiveAssertions</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
-    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
-    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
-    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
-    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
-    <CodeContractsRunCodeAnalysis>True</CodeContractsRunCodeAnalysis>
-    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
-    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
-    <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
-    <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
-    <CodeContractsRedundantAssumptions>True</CodeContractsRedundantAssumptions>
-    <CodeContractsAssertsToContractsCheckBox>True</CodeContractsAssertsToContractsCheckBox>
-    <CodeContractsRedundantTests>True</CodeContractsRedundantTests>
-    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
-    <CodeContractsMissingPublicEnsuresAsWarnings>False</CodeContractsMissingPublicEnsuresAsWarnings>
-    <CodeContractsInferRequires>True</CodeContractsInferRequires>
-    <CodeContractsInferEnsures>False</CodeContractsInferEnsures>
-    <CodeContractsInferEnsuresAutoProperties>True</CodeContractsInferEnsuresAutoProperties>
-    <CodeContractsInferObjectInvariants>False</CodeContractsInferObjectInvariants>
-    <CodeContractsSuggestAssumptions>False</CodeContractsSuggestAssumptions>
-    <CodeContractsSuggestAssumptionsForCallees>False</CodeContractsSuggestAssumptionsForCallees>
-    <CodeContractsSuggestRequires>False</CodeContractsSuggestRequires>
-    <CodeContractsNecessaryEnsures>True</CodeContractsNecessaryEnsures>
-    <CodeContractsSuggestObjectInvariants>False</CodeContractsSuggestObjectInvariants>
-    <CodeContractsSuggestReadonly>True</CodeContractsSuggestReadonly>
-    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
-    <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
-    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
-    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
-    <CodeContractsCustomRewriterAssembly />
-    <CodeContractsCustomRewriterClass />
-    <CodeContractsLibPaths />
-    <CodeContractsExtraRewriteOptions />
-    <CodeContractsExtraAnalysisOptions />
-    <CodeContractsSQLServerOption />
-    <CodeContractsBaseLineFile />
-    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
-    <CodeContractsSkipAnalysisIfCannotConnectToCache>False</CodeContractsSkipAnalysisIfCannotConnectToCache>
-    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
-    <CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>
-    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
-    <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
-    <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <DefineConstants>$(DefineConstants);EXPRESSIVE_ASSERTIONS_ASSEMBLY</DefineConstants>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup>
-    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="ExpressionToCodeLib, Version=1.5.4.0, Culture=neutral, PublicKeyToken=b43a6eb33831e563, processorArchitecture=MSIL">
-      <HintPath>..\packages\ExpressionToCodeLib.1.5.4.0\lib\net40-Client\ExpressionToCodeLib.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ExpressiveExpressionTrees, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ExpressiveExpressionTrees.1.1.1\lib\ExpressiveExpressionTrees.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ExpressiveReflection, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ExpressiveReflection.1.2.6\lib\ExpressiveReflection.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="AssertionContext.cs" />
-    <Compile Include="AssertionContextExtensions.cs" />
-    <Compile Include="Data\AssertionData.cs" />
-    <Compile Include="Data\AssertionFailure.cs" />
-    <Compile Include="Data\AssertionSuccess.cs" />
-    <Compile Include="BaseAssertions.cs" />
-    <Compile Include="CollectionAssertions.cs" />
-    <Compile Include="ExceptionHandlingAssertions.cs" />
-    <Compile Include="Exceptions\DataMismatchException.cs" />
-    <Compile Include="Exceptions\StateException.cs" />
-    <Compile Include="ExpressionEvaluator\ExpressionEvaluatorExtensions.cs" />
-    <Compile Include="Tooling\AssertionInverterTool.cs" />
-    <Compile Include="Tooling\IgnoreDeclaredFailureAssertionTool.cs" />
-    <Compile Include="Tooling\IgnoreInconclusiveAssertionTool.cs" />
-    <Compile Include="Tooling\ShortAssertionRendererTool.cs" />
-    <Compile Include="Tooling\SoftAssertionTool.cs" />
-    <Compile Include="UnSortedCollectionAssertions.cs" />
-    <Compile Include="SortedCollectionAssertions.cs" />
-    <Compile Include="ComparisonAssertions.cs" />
-    <Compile Include="ComparisonAssertions.Generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ComparisonAssertions.Generated.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DeclarativeAssertions.cs" />
-    <Compile Include="Data\DeclaredFailure.cs" />
-    <Compile Include="Data\DeclaredInconclusive.cs" />
-    <Compile Include="ExpressionEvaluator\DefaultEvaluator.cs" />
-    <Compile Include="IAssertionContext.cs" />
-    <Compile Include="IAssertionTool.cs" />
-    <Compile Include="ExpressionEvaluator\IExpressionEvaluator.cs" />
-    <Compile Include="Exceptions\IncompleteAssertionException.cs" />
-    <Compile Include="NullAssertions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rendering\ShortAssertionRenderer.cs" />
-    <Compile Include="Rendering\TypeBasedParamterNameGenerator.cs" />
-    <Compile Include="TrueFalseAssertions.cs" />
-    <Compile Include="TypeAssertions.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Package.nuspec" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ComparisonAssertions.Generated.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ComparisonAssertions.Generated.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>mkdir "$(TargetDir)tmp"
-"$(SolutionDir)packages\ILMerge.Tools.2.14.1208\tools\ILMerge.exe"  "$(TargetPath)" "$(TargetDir)ExpressiveExpressionTrees.dll" "$(TargetDir)ExpressionToCodeLib.dll" "$(TargetDir)ExpressiveReflection.dll" "/out:$(TargetDir)tmp\$(TargetFileName)" /internalize
-del /F "$(TargetDir)ExpressiveExpressionTrees.dll" 
-del /F "$(TargetDir)ExpressionToCodeLib.dll" 
-del /F "$(TargetDir)ExpressiveReflection.dll"
-del /F "$(TargetDir)$(TargetName)$(TargetExt)"
-del /F "$(TargetDir)$(TargetName).pdb"
-move "$(TargetDir)tmp\$(TargetName)$(TargetExt)" "$(TargetDir)$(TargetName)$(TargetExt)"
-move "$(TargetDir)tmp\$(TargetName).pdb" "$(TargetDir)$(TargetName).pdb"
-rmdir "$(TargetDir)tmp"</PostBuildEvent>
+    <!-- We do not use the auto-generated nuspec files feature, instead see build task below -->
+    <NuspecFile>ExpressiveAssertions.nuspec</NuspecFile>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <!-- We do use the auto-generated assembly info, but version number is pulled in from GetProjectProps build task below -->
+    <AssemblyTitle>ExpressiveAssertions</AssemblyTitle>
+    <AssemblyProduct>ExpressiveAssertions</AssemblyProduct>
+    <Company>Resonance Development</Company>
+    <Description>Flexible assertion library leveraging the .NET expression tree syntax</Description>
   </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+  <!-- load version number and populate properties needed for generating assemblyInfo and nuspec -->
+  <Target Name="GetProjectProps" BeforeTargets="GetAssemblyVersion">
+    <Message Text="... Compilation For Framework $(TargetFramework)" Importance="High" />
+    <Message Text="... Generating Assembly Version" Importance="High" />
+    <ReadLinesFromFile File="../ExpressiveAssertions.VersionNumber.md">
+      <Output TaskParameter="Lines" ItemName="CommonVersion" />
+    </ReadLinesFromFile>
+    <PropertyGroup>
+      <Version>@(CommonVersion)</Version>
+      <FileVersion>@(CommonVersion)</FileVersion>
+      <AssemblyVersion>@(CommonVersion)</AssemblyVersion>
+    </PropertyGroup>
+    <Message Text="... Generated Assembly Version $(Version)" Importance="High" />
   </Target>
-  <Target Name="AfterBuild">
+  <ItemGroup>
+    <T4TemplatesWOMD Include="**\*.tt" />
+		<LocateT4Engines Include="$(NugetPackageRoot)**\*TextTransform.exe" />
+  </ItemGroup>
+	<Target Name="T4TransformMetadata" BeforeTargets="T4Transforms">
+		<CreateItem
+			Include="@(T4TemplatesWOMD)"
+			AdditionalMetadata="GeneratedFile=%(RelativeDir)%(Filename).cs">
+			<Output TaskParameter="Include" ItemName="T4Templates" />
+		</CreateItem>
+	</Target>
+	<Target Name="T4Transforms" BeforeTargets="BeforeBuild;BeforeRebuild" Inputs="@(T4Templates)" Outputs="@(T4Templates->'%(GeneratedFile)')">
+			<!--<Target Name="T4Transforms" BeforeTargets="BeforeBuild;BeforeRebuild">-->
+		<PropertyGroup>
+			<T4Engine>$(NugetPackageRoot)mono.texttemplating/1.3.1/tools/TextTransform.exe</T4Engine>
+		</PropertyGroup>
+		<ItemGroup>
+			<InvokeT4Engine Include="@(T4Templates -> '&quot;$(T4Engine)&quot; %(Identity) -o %(GeneratedFile)')" />
+		</ItemGroup>
+		<Message Importance="low" Text="Nuget path: $(NugetPackageRoot)" />
+		<Message Importance="low" Text="Detect the following mono.texttemplating exes: @(LocateT4Engines)" />
+		<Message Importance="high" Text="Inputs are: @(T4Templates)" />
+		<Message Importance="high" Text="Outputs are: @(T4Templates->'%(GeneratedFile)')" />
+		<Message Importance="high" Text="Invoking Mono.TextTemplatingat path: $(T4Engine)" />
+		<Message Importance="high" Text="%(InvokeT4Engine.Identity)" />
+		<Exec Command="%(InvokeT4Engine.Identity)" />
   </Target>
-  -->
+  <Target Name="GeneratePPs" BeforeTargets="Build">
+    <Message Text="... Generating Nuspec" Importance="High" />
+    <ReadLinesFromFile File="ExpressiveAssertions.nuspec.header">
+      <Output TaskParameter="Lines" ItemName="NuspecHeader" />
+    </ReadLinesFromFile>
+    <ReadLinesFromFile File="ExpressiveAssertions.nuspec.footer">
+      <Output TaskParameter="Lines" ItemName="NuspecFooter" />
+    </ReadLinesFromFile>
+    <ReadLinesFromFile File="../ExpressiveAssertions.VersionNumber.md">
+      <Output TaskParameter="Lines" ItemName="CommonVersion" />
+    </ReadLinesFromFile>
+    <ReadLinesFromFile File="../ExpressiveAssertions.CommonNugetProperties.xml">
+      <Output TaskParameter="Lines" ItemName="NuspecCommonProperties" />
+    </ReadLinesFromFile>
+    <ReadLinesFromFile File="../ExpressiveAssertions.ReleaseNotes.md">
+      <Output TaskParameter="Lines" ItemName="CommonReleaseNotes" />
+    </ReadLinesFromFile>
+    <PropertyGroup>
+      <CommonReleaseNotesToEncode>@(CommonReleaseNotes->'%(Identity)', '%0a')</CommonReleaseNotesToEncode>
+      <CommonReleaseNotesEncoded>
+        $(CommonReleaseNotesToEncode.Replace('&amp;', '&amp;amp;').Replace('&lt;', '&amp;lt;').Replace('&gt;', '&amp;gt;'))
+      </CommonReleaseNotesEncoded>
+    </PropertyGroup>
+    <CreateProperty Value="&lt;version&gt;">
+      <Output TaskParameter="Value" PropertyName="NuspecVersionPrefix" />
+    </CreateProperty>
+    <CreateProperty Value="&lt;/version&gt;">
+      <Output TaskParameter="Value" PropertyName="NuspecVersionSuffix" />
+    </CreateProperty>
+    <CreateProperty Value="&lt;releaseNotes&gt;">
+      <Output TaskParameter="Value" PropertyName="NuspecReleaseNotesPrefix" />
+    </CreateProperty>
+    <CreateProperty Value="&lt;/releaseNotes&gt;">
+      <Output TaskParameter="Value" PropertyName="NuspecReleaseNotesSuffix" />
+    </CreateProperty>
+    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="@(NuspecHeader)" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="@(NuspecCommonProperties)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="$(NuspecVersionPrefix)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="@(CommonVersion)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="$(NuspecVersionSuffix)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="$(NuspecReleaseNotesPrefix)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="$(CommonReleaseNotesEncoded)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="$(NuspecReleaseNotesSuffix)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="@(NuspecFooter)" Overwrite="false" Encoding="UTF-8" />
+    <Message Text="... Generated Nuspec" Importance="High" />
+  </Target>
+  <ItemGroup>
+    <None Include="ExpressiveAssertions.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ExpressionToCodeLib" Version="2.5.1" />
+    <PackageReference Include="ExpressiveExpressionTrees" Version="2.0.0" />
+    <PackageReference Include="ExpressiveReflection" Version="2.0.1" />
+    <PackageReference Include="Mono.TextTemplating" Version="1.3.1" />
+  </ItemGroup>
 </Project>

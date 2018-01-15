@@ -1,9 +1,9 @@
 # Versioning
-This is version 0.9.7 of the expressive assertions library
+This is version 0.9.8 of the expressive assertions library
 
-This package is available from nuget at: https://www.nuget.org/packages/ExpressiveAssertions/0.9.7
+This package is available from nuget at: https://www.nuget.org/packages/ExpressiveAssertions/0.9.8
 
-The source for this release is available on github at: https://github.com/hannasm/ExpressiveAssertionsDotNet/releases/tag/0.9.7
+The source for this release is available on github at: https://github.com/hannasm/ExpressiveAssertionsDotNet/releases/tag/0.9.8
 
 # ExpressiveAssertionsDotNet
 Flexible Assertion Library Leveraging the .NET Expression Tree Syntax. This library attempts to provide a robust, open
@@ -134,61 +134,26 @@ There is currently a very minimal collection of unit tests available. A more rob
 reaching it's 1.0.0 version release.
 
 # Build Notes
-The build for this project depends on ILMerge, and embeds several other assemblies using the /internalize flag. The 
-embedded assemblies include:
+This project has several dependencies which you can pull down automatically through nuget, or manualy at their project pages:
 
   * ExpressionToCode - https://github.com/EamonNerbonne/ExpressionToCode
   * ExpressiveReflection - https://github.com/hannasm/ExpressiveReflectionDotnet
   * ExpressiveExpressionTrees - https://github.com/hannasm/ExpressiveExpressionTreesDotNet
 
-These assemblies provide features that are being used internally, but their functionality is not exposed in any way externally as part
-of an API, making them perfect candidates for the internalization. You should be able to safely consume this assembly without taking on 
-any new dependencies in your own solution.
+These assemblies provide features that are being used internally, but they are not exposed through the public API
+making them perfect candidates for internalization, but this isn't easily available in dotnet core at this point in time.
+
+## T4 Templating
+We are using some home-brew msbuild targets for handling t4 templating. It depends on mono.texttemplating and uses what
+hopefully is a valid way of finding the appropriate executable. It currently suffers from an issue with the
+text templating files not being picked up on first run. The first time a text templating file is processed, a new .cs file
+is being created, and msbuild will not see / compile that new file. The solution is to just compile a second time
 
 # Licensing
 This code is released on under an MIT license. 
 
-This code uses parts of ExpressionToCode which is licensed under the Apache license. A copy of this license is included.
+This code uses parts of ExpressionToCode which is licensed under the Apache license.
 
 # Changelog
 
-## 0.9.7
-    * 0.9.7 - addition of AssertionInverterTool to treat all success as failure and all failure as success
-	* 0.9.7 - addition of IgnoreDeclaredFailureAssertionTool which will ignore any declared failure assertions
-	* 0.9.7 - addition of IgnoreInconclsuiveAssertionTool which will ignore any inconclusive assertions
-
-## 0.9.6
-    * 0.9.6 - fix bug with mstest handling of assertion messages
-
-## 0.9.5
-    * 0.9.5 - fix bug in short assertion renderer causing all failed assertions to be marked as success
-
-## 0.9.4
-    * 0.9.4 - fixed another nuget packaging bug
-
-## 0.9.3
-    * 0.9.3 - added some tests on the base assertions
-    * 0.9.3 - refactored a number of specialized / internally focused classes to separate namespaces to limit clutter in the primary namespace
-    * 0.9.3 - cleaned up some documentation in README.md
-    * 0.9.3 - nuget package now qualifies the readme as README_ExpressiveAssertions.md instead of just README.md
-    * 0.9.3 - MSTest assertion no longer renders assertions automatically, you must specifically chain it with a renderer assertion (such as the builtin ShortAssertionRendererTool)
-
-## 0.9.2
-  * better error reporting in the mstest driver
-  * started removing code contracts stuff because they don't report error messages the way i want
-  * Renamed the Assert() method to be just another overload of Check() instead
-  * Add the concept of context data including api methods for using It
-  * updates to generic AreEqual and AreNotEqual to use object.Equals() for proper equality checking in case of anonymous types
-  * new assertions nfor IsInstanceof() / IsNotInstanceOf()
-  * add initial suite of assertions for collection types
-  * new assertions for IsNull() / IsNotNull()
-  * new assertions for IsTrue() / IsFalse()
-  * new assertions for Throws()
-  * add SoftAssertionTool
-  * unit testing for assertion context code
-
-## 0.9.1
-  * adding license files to nuget packages
-
-## 0.9.0
-  * initial release is beta / alpha version with some incomplete / missing features
+[For Release Notes See Here](ExpressiveReflection.ReleaseNotes.md)

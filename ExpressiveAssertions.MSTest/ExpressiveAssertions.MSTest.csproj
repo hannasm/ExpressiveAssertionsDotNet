@@ -1,74 +1,89 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5C3A829F-7DB6-45BD-A92B-EF6C31CEE82A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExpressiveAssertions.MSTest</RootNamespace>
-    <AssemblyName>ExpressiveAssertions.MSTest</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <DefineConstants>$(DefineConstants);EXPRESSIVE_ASSERTIONS_ASSEMBLY</DefineConstants>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="MSTestAssertionTool.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ExpressiveAssertions\ExpressiveAssertions.csproj">
-      <Project>{524f7a5f-29ed-4e6a-97df-90e9ec9d15c2}</Project>
-      <Name>ExpressiveAssertions</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Package.nuspec" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <!-- We do not use the auto-generated nuspec files feature, instead see build task below -->
+    <NuspecFile>ExpressiveAssertions.MSTest.nuspec</NuspecFile>
   </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+  <PropertyGroup>
+    <!-- We do use the auto-generated assembly info, but version number is pulled in from GetProjectProps build task below -->
+    <AssemblyTitle>ExpressiveAssertions.MSTest</AssemblyTitle>
+    <AssemblyProduct>ExpressiveAssertions.MSTest</AssemblyProduct>
+    <Company>Resonance Development</Company>
+    <Description>MSTest Driver for ExpressiveAssertions, a Flexible assertion library leveraging the .NET expression tree syntax</Description>
+  </PropertyGroup>
+  <!-- load version number and populate properties needed for generating assemblyInfo and nuspec -->
+  <Target Name="GetProjectProps" BeforeTargets="GetAssemblyVersion">
+    <Message Text="... Compilation For Framework $(TargetFramework)" Importance="High" />
+    <Message Text="... Generating Assembly Version" Importance="High" />
+    <ReadLinesFromFile File="../ExpressiveAssertions.VersionNumber.md">
+      <Output TaskParameter="Lines" ItemName="CommonVersion" />
+    </ReadLinesFromFile>
+    <PropertyGroup>
+      <Version>@(CommonVersion)</Version>
+      <FileVersion>@(CommonVersion)</FileVersion>
+      <AssemblyVersion>@(CommonVersion)</AssemblyVersion>
+    </PropertyGroup>
+    <Message Text="... Generated Assembly Version $(Version)" Importance="High" />
   </Target>
-  <Target Name="AfterBuild">
+  <Target Name="GeneratePPs" BeforeTargets="Build">
+    <Message Text="... Generating Nuspec" Importance="High" />
+    <ReadLinesFromFile File="ExpressiveAssertions.MSTest.nuspec.header">
+      <Output TaskParameter="Lines" ItemName="NuspecHeader" />
+    </ReadLinesFromFile>
+    <ReadLinesFromFile File="ExpressiveAssertions.MSTest.nuspec.footer">
+      <Output TaskParameter="Lines" ItemName="NuspecFooter" />
+    </ReadLinesFromFile>
+    <ReadLinesFromFile File="../ExpressiveAssertions.VersionNumber.md">
+      <Output TaskParameter="Lines" ItemName="CommonVersion" />
+    </ReadLinesFromFile>
+    <ReadLinesFromFile File="../ExpressiveAssertions.CommonNugetProperties.xml">
+      <Output TaskParameter="Lines" ItemName="NuspecCommonProperties" />
+    </ReadLinesFromFile>
+    <ReadLinesFromFile File="../ExpressiveAssertions.ReleaseNotes.md">
+      <Output TaskParameter="Lines" ItemName="CommonReleaseNotes" />
+    </ReadLinesFromFile>
+    <PropertyGroup>
+      <CommonReleaseNotesToEncode>@(CommonReleaseNotes->'%(Identity)', '%0a')</CommonReleaseNotesToEncode>
+      <CommonReleaseNotesEncoded>
+        $(CommonReleaseNotesToEncode.Replace('&amp;', '&amp;amp;').Replace('&lt;', '&amp;lt;').Replace('&gt;', '&amp;gt;'))
+      </CommonReleaseNotesEncoded>
+    </PropertyGroup>
+    <CreateProperty Value="&lt;version&gt;">
+      <Output TaskParameter="Value" PropertyName="NuspecVersionPrefix" />
+    </CreateProperty>
+    <CreateProperty Value="&lt;/version&gt;">
+      <Output TaskParameter="Value" PropertyName="NuspecVersionSuffix" />
+    </CreateProperty>
+    <CreateProperty Value="&lt;releaseNotes&gt;">
+      <Output TaskParameter="Value" PropertyName="NuspecReleaseNotesPrefix" />
+    </CreateProperty>
+    <CreateProperty Value="&lt;/releaseNotes&gt;">
+      <Output TaskParameter="Value" PropertyName="NuspecReleaseNotesSuffix" />
+    </CreateProperty>
+    <WriteLinesToFile File="ExpressiveAssertions.MSTest.nuspec" Lines="@(NuspecHeader)" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.MSTest.nuspec" Lines="@(NuspecCommonProperties)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.MSTest.nuspec" Lines="$(NuspecVersionPrefix)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.MSTest.nuspec" Lines="@(CommonVersion)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.MSTest.nuspec" Lines="$(NuspecVersionSuffix)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.MSTest.nuspec" Lines="$(NuspecReleaseNotesPrefix)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.MSTest.nuspec" Lines="$(CommonReleaseNotesEncoded)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.MSTest.nuspec" Lines="$(NuspecReleaseNotesSuffix)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.MSTest.nuspec" Lines="@(NuspecFooter)" Overwrite="false" Encoding="UTF-8" />
+    <Message Text="... Generated Nuspec" Importance="High" />
   </Target>
-  -->
+  <ItemGroup>
+    <None Include="ExpressiveAssertions.MSTest.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ExpressionToCodeLib" Version="2.5.1" />
+    <PackageReference Include="ExpressiveExpressionTrees" Version="2.0.0" />
+    <PackageReference Include="ExpressiveReflection" Version="2.0.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExpressiveAssertions\ExpressiveAssertions.csproj" />
+  </ItemGroup>
 </Project>
