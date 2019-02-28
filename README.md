@@ -1,9 +1,9 @@
 # Versioning
-This is version 0.9.8 of the expressive assertions library
+This is version 0.9.9 of the expressive assertions library
 
-This package is available from nuget at: https://www.nuget.org/packages/ExpressiveAssertions/0.9.8
+This package is available from nuget at: https://www.nuget.org/packages/ExpressiveAssertions/0.9.9
 
-The source for this release is available on github at: https://github.com/hannasm/ExpressiveAssertionsDotNet/releases/tag/0.9.8
+The source for this release is available on github at: https://github.com/hannasm/ExpressiveAssertionsDotNet/releases/tag/0.9.9
 
 # ExpressiveAssertionsDotNet
 Flexible Assertion Library Leveraging the .NET Expression Tree Syntax. This library attempts to provide a robust, open

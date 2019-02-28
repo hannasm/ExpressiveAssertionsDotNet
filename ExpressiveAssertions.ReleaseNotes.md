@@ -1,3 +1,5 @@
+    * 0.9.9 - rendering code was excluding  thrown exception details from the assertion failure messages
+    * 0.9.9 - added a little more robust handling for exceptions to help pinpoint where the exception is ocurring.
     * 0.9.8 - upgrade to netstandard 2.0 
     * 0.9.7 - addition of AssertionInverterTool to treat all success as failure and all failure as success
     * 0.9.7 - addition of IgnoreDeclaredFailureAssertionTool which will ignore any declared failure assertions

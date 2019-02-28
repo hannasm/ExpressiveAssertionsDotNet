@@ -130,7 +130,8 @@ namespace ExpressiveAssertions.Rendering
 
             if (data.CombinedException != null)
             {
-                s.Append(" One or more exceptions were included.");
+                s.Append(" One or more exceptions were included. ");
+                s.Append(data.CombinedException.ToString());
             }
 
             return s.ToString();

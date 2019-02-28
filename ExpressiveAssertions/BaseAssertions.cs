@@ -1,5 +1,6 @@
 ﻿using ExpressiveAssertions.Data;
 using ExpressiveAssertions.ExpressionEvaluator;
+using ExpressiveAssertions.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -91,21 +92,38 @@ namespace ExpressiveAssertions
             ParameterExpression[] expectedRefs = null;
             ParameterExpression[] actualRefs = null;
 
-            try
-            {
-                var expectedVal = assertTool.GetExpressionEvaluator().Eval(expected1);
-                var actualVal = assertTool.GetExpressionEvaluator().Eval(actual1);
-                result = assertTool.GetExpressionEvaluator().Eval(test, expectedVal, actualVal);
+            T1 expectedVal = default(T1); T2 actualVal = default(T2);
+            EvaluatedExpressionException expectedException = null, actualException = null;
 
+            try {
+                expectedVal = assertTool.GetExpressionEvaluator().Eval(expected1);
                 expectedVals = new object[] { expectedVal };
                 expectedRefs = new[] { test.Parameters[0] };
-
+            } catch (Exception eError) {
+                expectedException = new EvaluatedExpressionException(expected1, eError);
+            }
+            try {
+                actualVal = assertTool.GetExpressionEvaluator().Eval(actual1);
                 actualVals = new object[] { actualVal };
                 actualRefs = new[] { test.Parameters[1] };
+            } catch (Exception eError) {
+                actualException = new EvaluatedExpressionException(actual1, eError);
             }
-            catch (Exception eInternal)
-            {
-                internalError = eInternal;
+
+            if (expectedException == null && actualException == null) {
+              try {
+                  result = assertTool.GetExpressionEvaluator().Eval(test, expectedVal, actualVal);
+              } catch (Exception eError) {
+                  internalError = new EvaluatedExpressionException(test, eError);
+              }
+            } else if (expectedException != null && actualException != null) {
+              internalError = new AggregateException(expectedException, actualException);
+            } else if (expectedException != null) {
+              internalError = expectedException;
+            } else if (actualException != null) {
+              internalError = actualException;
+            } else {
+              throw new InvalidOperationException("This exception should be logically impossible to reach");
             }
 
             if (!result)
