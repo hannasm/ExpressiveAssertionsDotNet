@@ -22,43 +22,25 @@ namespace ExpressiveAssertions.Tooling
             _inner = inner;
         }
 
-        public void Accept(DeclaredFailure failure)
+        public void Accept(AssertionDeclaredFailure failure)
         {
             _inner.Accept(failure);
         }
 
-        public void Accept(DeclaredInconclusive inconclusive)
+        public void Accept(AssertionDeclaredInconclusive inconclusive)
         {
             _inner.Accept(inconclusive);
         }
         
         public void Accept(AssertionSuccess assertionSuccess)
         {
-            var inverted = new AssertionFailure(
-                assertionSuccess.Assertion,
-                assertionSuccess.ExpectedReference,
-                assertionSuccess.ExpectedData,
-                assertionSuccess.ActualReference,
-                assertionSuccess.ActualData,
-                assertionSuccess.Message, assertionSuccess.Format,
-                assertionSuccess.ExternalException, assertionSuccess.InternalException,
-                assertionSuccess.ContextData
-            );
+            var inverted = new AssertionFailure(assertionSuccess);
             _inner.Accept(inverted);
         }
 
         public void Accept(AssertionFailure failure)
         {
-            var inverted = new AssertionSuccess(
-                failure.Assertion,
-                failure.ExpectedReference,
-                failure.ExpectedData,
-                failure.ActualReference,
-                failure.ActualData,
-                failure.Message, failure.Format,
-                failure.ExternalException, failure.InternalException,
-                failure.ContextData
-            );
+            var inverted = new AssertionSuccess(failure);
             _inner.Accept(inverted);
         }
     }

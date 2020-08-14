@@ -24,13 +24,13 @@ namespace ExpressiveAssertions.Tooling
         public int InconclusiveCount { get { return inconclusiveCount; } }
         public int Count { get { return _memory.Count; } }
 
-        public void Accept(DeclaredFailure failure)
+        public void Accept(AssertionDeclaredFailure failure)
         {
             _memory.Add(failure);
             failureCount++;
         }
 
-        public void Accept(DeclaredInconclusive inconclusive)
+        public void Accept(AssertionDeclaredInconclusive inconclusive)
         {
             _memory.Add(inconclusive);
             inconclusiveCount++;

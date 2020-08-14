@@ -1,0 +1,22 @@
+
+AssertionFailure new Func<string, string, bool>((a, b) => a == b)(v_01.value1.ToUpper(), v_02.value2.ToUpper())
+ with v_01.value1 = ~null~
+ and v_02.value2 = ~null~.
+ Message: ~null~
+ One or more exceptions were included. [IncompleteAssertionException]ExpressiveAssertions.Exceptions.IncompleteAssertionException: The assertion was unable to complete due to an error
+ ---> System.AggregateException: One or more errors occurred. (Evaluation of expression '() => value1.ToUpper()' failed with unhandled exception) (Evaluation of expression '() => value2.ToUpper()' failed with unhandled exception)
+ ---> ExpressiveAssertions.Exceptions.EvaluatedExpressionException: Evaluation of expression '() => value1.ToUpper()' failed with unhandled exception
+ ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at lambda_method(Closure )
+   at ExpressiveAssertions.ExpressionEvaluator.DefaultEvaluator.Eval[T](Expression`1 target) in /home/hannasm/ExpressiveAssertionsDotNet/ExpressiveAssertions/ExpressionEvaluator/DefaultEvaluator.cs:line 19
+   at ExpressiveAssertions.BaseAssertions.Check[T1,T2](IAssertionTool assertTool, Expression`1 expected1, Expression`1 actual1, Expression`1 test, Exception exc, String message, Object[] fmt) in /home/hannasm/ExpressiveAssertionsDotNet/ExpressiveAssertions/BaseAssertions.cs:line 103
+   --- End of inner exception stack trace ---
+   --- End of inner exception stack trace ---
+ ---> (Inner Exception #1) ExpressiveAssertions.Exceptions.EvaluatedExpressionException: Evaluation of expression '() => value2.ToUpper()' failed with unhandled exception
+ ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at lambda_method(Closure )
+   at ExpressiveAssertions.ExpressionEvaluator.DefaultEvaluator.Eval[T](Expression`1 target) in /home/hannasm/ExpressiveAssertionsDotNet/ExpressiveAssertions/ExpressionEvaluator/DefaultEvaluator.cs:line 19
+   at ExpressiveAssertions.BaseAssertions.Check[T1,T2](IAssertionTool assertTool, Expression`1 expected1, Expression`1 actual1, Expression`1 test, Exception exc, String message, Object[] fmt) in /home/hannasm/ExpressiveAssertionsDotNet/ExpressiveAssertions/BaseAssertions.cs:line 95
+   --- End of inner exception stack trace ---<---
+
+   --- End of inner exception stack trace ---

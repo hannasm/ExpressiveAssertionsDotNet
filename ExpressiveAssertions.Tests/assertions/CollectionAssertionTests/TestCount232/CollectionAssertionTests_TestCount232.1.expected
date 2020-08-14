@@ -1,0 +1,15 @@
+
+AssertionFailure new Func<int, int, bool>((a, b) => a == b)(v_01.expectedCount, v_02.actual.Count())
+ with a = [int]3
+ and v_01.expectedCount = [int]3
+ and v_02.actual = ~null~.
+ Message: [string]"with message"
+ One or more exceptions were included. [IncompleteAssertionException]ExpressiveAssertions.Exceptions.IncompleteAssertionException: The assertion was unable to complete due to an error
+ ---> ExpressiveAssertions.Exceptions.EvaluatedExpressionException: Evaluation of expression '() => actual.Count()' failed with unhandled exception
+ ---> System.ArgumentNullException: Value cannot be null. (Parameter 'source')
+   at System.Linq.ThrowHelper.ThrowArgumentNullException(ExceptionArgument argument)
+   at System.Linq.Enumerable.Count[TSource](IEnumerable`1 source)
+   at ExpressiveAssertions.ExpressionEvaluator.DefaultEvaluator.Eval[T](Expression`1 target) in /home/hannasm/ExpressiveAssertionsDotNet/ExpressiveAssertions/ExpressionEvaluator/DefaultEvaluator.cs:line 19
+   at ExpressiveAssertions.BaseAssertions.Check[T1,T2](IAssertionTool assertTool, Expression`1 expected1, Expression`1 actual1, Expression`1 test, Exception exc, String message, Object[] fmt) in /home/hannasm/ExpressiveAssertionsDotNet/ExpressiveAssertions/BaseAssertions.cs:line 95
+   --- End of inner exception stack trace ---
+   --- End of inner exception stack trace ---

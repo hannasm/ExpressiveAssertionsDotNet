@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using ExpressiveAssertions.Tooling;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,14 @@ namespace ExpressiveAssertions.Tests
     [TestClass]
     public class ReadmeExamples
     {
-        IAssertionTool assert = ExpressiveAssertions.Tooling.ShortAssertionRendererTool.Create(
-            ExpressiveAssertions.MSTest.MSTestAssertionTool.Create()
+        // Render the assertion outcomes to the test result stream but do not actually fail a test based on any outcomes
+        IAssertionTool assert = AssertionRendererTool.Create(
+            CompositeAssertionTool.Create(
+                TraceLoggingAssertionTool.Create(),
+                NullAssertionTool.Create()
+            )
         );
+
     
         [TestMethod]
         public void Test001()

@@ -1,0 +1,7 @@
+
+AssertionFailure new Func<int, int, bool>((a, b) => a == b)(v_01.expected, v_02.actual.Count())
+ with a = [int]4
+ and b = [int]3
+ and v_01.expected = [int]4
+ and v_02.actual = [int[]]@([int]1,[int]2,[int]3).
+ Message: ~null~

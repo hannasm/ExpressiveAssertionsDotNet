@@ -1,0 +1,12 @@
+
+AssertionSuccess new Func<string, string, bool>((a, b) => a == b)(FilesystemAssertionRepository.AccessExpectation(v_01.filename, v_02.fromDisk, v_03.tool), FilesystemAssertionRepository.WriteActualToDisk(v_04.filename, v_05.content, v_06.toDisk, v_07.tool))
+ with a = [string]"hello world"
+ and b = [string]"hello world"
+ and v_01.filename = [string]"../../../assertions/FilesystemAssertionRepositoryTests/Test004/FilesystemAssertionRepositoryTests_Test004.1.expected"
+ and v_02.fromDisk = [System.String <ExpectationFromDisk>b__2_0(Byte[])]
+ and v_03.tool = [AssertionRendererTool]@{}
+ and v_04.filename = [string]"../../../assertions/FilesystemAssertionRepositoryTests/Test004/FilesystemAssertionRepositoryTests_Test004.1.actual"
+ and v_05.content = [string]"hello world"
+ and v_06.toDisk = [Byte[] <ActualToDisk>b__1_0(System.String)]
+ and v_07.tool = [AssertionRendererTool]@{}.
+ Message: ~null~

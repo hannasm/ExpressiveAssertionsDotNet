@@ -17,11 +17,11 @@ namespace ExpressiveAssertions.Tooling
         {
             _inner = inner;
         }
-        public void Accept(DeclaredFailure failure)
+        public void Accept(AssertionDeclaredFailure failure)
         {
         }
 
-        public void Accept(DeclaredInconclusive inconclusive)
+        public void Accept(AssertionDeclaredInconclusive inconclusive)
         {
             _inner.Accept(inconclusive);
         }

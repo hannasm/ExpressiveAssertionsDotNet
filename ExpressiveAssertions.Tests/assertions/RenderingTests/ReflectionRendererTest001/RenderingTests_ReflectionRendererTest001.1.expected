@@ -1,0 +1,7 @@
+
+AssertionFailure new Func<<>f__AnonymousType3<int>, <>f__AnonymousType3<int>, bool>((a, b) => object.Equals(a, b))(v_01.expected, v_02.actual)
+ with a = [<>f__AnonymousType3<int>]@{"TestField01"=[int]10;}
+ and b = [<>f__AnonymousType3<int>]@{"TestField01"=[int]20;}
+ and v_01.expected = [<>f__AnonymousType3<int>]@{"TestField01"=[int]10;}
+ and v_02.actual = [<>f__AnonymousType3<int>]@{"TestField01"=[int]20;}.
+ Message: ~null~

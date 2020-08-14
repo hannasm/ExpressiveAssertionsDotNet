@@ -250,3 +250,9 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# Actual files correspond to unit test generated temporary files
+**/*.actual
+
+# vim swp files
+**/*.swp

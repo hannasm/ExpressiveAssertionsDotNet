@@ -11,27 +11,27 @@ namespace ExpressiveAssertions
     {
         public static void Fail(this IAssertionTool tool)
         {
-            tool.Accept(new DeclaredFailure("{0}", new object[] { "Test Failed" }, null, null, tool.ContextGetData()));
+            tool.Accept(new AssertionDeclaredFailure("{0}", new object[] { "Test Failed" }, tool.ContextGetData()));
         }
         public static void Fail(this IAssertionTool tool, string msg)
         {
-            tool.Accept(new DeclaredFailure("{0}", new object[] { msg }, null, null, tool.ContextGetData()));
+            tool.Accept(new AssertionDeclaredFailure("{0}", new object[] { msg }, tool.ContextGetData()));
         }
         public static void Fail(this IAssertionTool tool, string msg, params object[] fmt)
         {
-            tool.Accept(new DeclaredFailure(msg, fmt, null, null, tool.ContextGetData()));
+            tool.Accept(new AssertionDeclaredFailure(msg, fmt, tool.ContextGetData()));
         }
         public static void Inconclusive(this IAssertionTool tool)
         {
-            tool.Accept(new DeclaredInconclusive("{0}", new object[] { "Test Status Inconclusive" }, null, null, tool.ContextGetData()));
+            tool.Accept(new AssertionDeclaredInconclusive("{0}", new object[] { "Test Status Inconclusive" }, tool.ContextGetData()));
         }
         public static void Inconclusive(this IAssertionTool tool, string msg)
         {
-            tool.Accept(new DeclaredInconclusive("{0}", new object[] { msg }, null, null, tool.ContextGetData()));
+            tool.Accept(new AssertionDeclaredInconclusive("{0}", new object[] { msg }, tool.ContextGetData()));
         }
         public static void Inconclusive(this IAssertionTool tool, string msg, params object[] fmt)
         {
-            tool.Accept(new DeclaredInconclusive(msg, fmt, null, null, tool.ContextGetData()));
+            tool.Accept(new AssertionDeclaredInconclusive(msg, fmt, tool.ContextGetData()));
         }
     }
 }

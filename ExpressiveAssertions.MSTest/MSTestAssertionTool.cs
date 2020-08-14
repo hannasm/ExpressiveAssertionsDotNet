@@ -18,32 +18,25 @@ namespace ExpressiveAssertions.MSTest
             return new MSTestAssertionTool();
         }
 
-        public void Accept(DeclaredFailure failure)
+        public void Accept(AssertionDeclaredFailure failure)
         {
             throw new Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException(
-                string.Format(failure.Message, failure.Format), failure.CombinedException);
+                failure.Message, failure.CombinedException);
         }
 
-        public void Accept(DeclaredInconclusive inconclusive)
+        public void Accept(AssertionDeclaredInconclusive inconclusive)
         {
             throw new Microsoft.VisualStudio.TestTools.UnitTesting.AssertInconclusiveException(
-                string.Format(inconclusive.Message, inconclusive.Format), inconclusive.CombinedException);
+                inconclusive.Message, inconclusive.CombinedException);
         }
 
         public void Accept(AssertionSuccess assertionSuccess)
         {
-            Debug.WriteLine("Assert Succeeded - " + string.Format(assertionSuccess.Message, assertionSuccess.Format));
         }
 
         public void Accept(AssertionFailure failure)
         {
-            var message = "Assert Failure - " + string.Format(failure.Message, failure.Format);
-            Debug.WriteLine(message);
-            if (failure.CombinedException != null)
-            {
-                Debug.WriteLine(failure.CombinedException.ToString());
-            }
-            throw new Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException(message, failure.CombinedException);
+            throw new Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException(failure.Message, failure.CombinedException);
         }
     }
 }

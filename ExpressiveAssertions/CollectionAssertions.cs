@@ -1,6 +1,7 @@
 ﻿using ExpressiveAssertions.ExpressionEvaluator;
 using ExpressiveExpressionTrees;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -11,6 +12,65 @@ namespace ExpressiveAssertions
 {
     public static class CollectionAssertions
     {
+        public static void EveryIsDistinct<T>(this IAssertionTool assertTool, IEnumerable<T> collection)
+        {
+            EveryIsDistinct(assertTool, () => collection, null, null);
+        }
+        public static void EveryIsDistinct<T>(this IAssertionTool assertTool, IEnumerable<T> collection, string msg)
+        {
+            EveryIsDistinct(assertTool, () => collection, msg, null);
+        }
+        public static void EveryIsDistinct<T>(this IAssertionTool assertTool, IEnumerable<T> collection, string msg, params object[] fmt)
+        {
+            EveryIsDistinct(assertTool, () => collection, msg, fmt);
+        }
+        public static void EveryIsDistinct<T>(this IAssertionTool assertTool, Expression<Func<IEnumerable<T>>> collectionExp)
+        {
+            EveryIsDistinct(assertTool, collectionExp, null, null);
+        }
+        public static void EveryIsDistinct<T>(this IAssertionTool assertTool, Expression<Func<IEnumerable<T>>> collectionExp, string msg)
+        {
+            EveryIsDistinct(assertTool, collectionExp, msg, null);
+        }
+        public static void EveryIsDistinct<T>(this IAssertionTool assertTool, Expression<Func<IEnumerable<T>>> collectionExp, string msg, params object[] fmt)
+        {
+            EachIsDistinct(assertTool, collectionExp, msg, fmt);
+        }
+
+        public static void EachIsDistinct<T>(this IAssertionTool assertTool, IEnumerable<T> collection)
+        {
+            EachIsDistinct(assertTool, () => collection, null, null);
+        }
+        public static void EachIsDistinct<T>(this IAssertionTool assertTool, IEnumerable<T> collection, string msg)
+        {
+            EachIsDistinct(assertTool, () => collection, msg, null);
+        }
+        public static void EachIsDistinct<T>(this IAssertionTool assertTool, IEnumerable<T> collection, string msg, params object[] fmt)
+        {
+            EachIsDistinct(assertTool, () => collection, msg, fmt);
+        }
+        public static void EachIsDistinct<T>(this IAssertionTool assertTool, Expression<Func<IEnumerable<T>>> collectionExp)
+        {
+            EachIsDistinct(assertTool, collectionExp, null, null);
+        }
+        public static void EachIsDistinct<T>(this IAssertionTool assertTool, Expression<Func<IEnumerable<T>>> collectionExp, string msg)
+        {
+            EachIsDistinct(assertTool, collectionExp, msg, null);
+        }
+        public static void EachIsDistinct<T>(this IAssertionTool assertTool, Expression<Func<IEnumerable<T>>> collectionExp, string msg, params object[] fmt)
+        {
+            var set = new HashSet<T>();
+            Func<IAssertionTool,T,bool> isDistinct = (assert,t)=>{
+                if (set.Contains(t)) { return false; }
+                set.Add(t);
+                return true;
+            };
+
+            assertTool.Each(collectionExp, (assert,t)=>assert.IsTrue(()=>isDistinct(assert, t)), msg, fmt);
+        }
+        
+
+
         public static void Every<T>(this IAssertionTool assertTool, IEnumerable<T> collection, Expression<Action<IAssertionTool, T>> action)
         {
             Each(assertTool, () => collection, action, null, null);
@@ -134,7 +194,7 @@ namespace ExpressiveAssertions
             var xgr = new ExpressionGenerator();
             var eval = assertTool.GetExpressionEvaluator();
             var exp = xgr.FromFunc(collection, c => c.Count());
-            assertTool.AreEqual(expected, exp.Body, msg, fmt);
+            assertTool.AreEqual(expected, exp, msg, fmt);
         }
         
         public static void IsEmpty<T>(this IAssertionTool assertTool, IEnumerable<T> collection)
@@ -162,7 +222,7 @@ namespace ExpressiveAssertions
             var xgr = new ExpressionGenerator();
             var eval = assertTool.GetExpressionEvaluator();
             var exp = xgr.FromFunc(collection, c => c.Count());
-            assertTool.AreEqual(0, exp.Body, msg, fmt);
+            assertTool.AreEqual(0, exp, msg, fmt);
         }
 
     }

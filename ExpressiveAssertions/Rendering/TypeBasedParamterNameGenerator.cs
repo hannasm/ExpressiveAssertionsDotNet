@@ -24,12 +24,13 @@ namespace ExpressiveAssertions.Rendering
             throw new Exception("Unable to generate name for prefix " + prefix);
         }
 
-        public static string GetName(Type t, HashSet<string> existingNames)
+        public static string GetName(Type t, HashSet<string> existingNames, int? maxLength = null)
         {
+            if (maxLength < 5) { maxLength = 5; }
             var typeName = t.Name;
-            if (typeName.Length > 7)
+            if (typeName.Length > maxLength)
             {
-                typeName = typeName.Substring(0, 2) + "..." + typeName.Substring(typeName.Length - 2);
+                typeName = typeName.Substring(0, (maxLength.Value-3)/2) + "..." + typeName.Substring(typeName.Length - ((maxLength.Value-3)/2));
             }
             typeName = typeName.ToLowerInvariant();
             if (_nameRule.IsMatch(typeName))

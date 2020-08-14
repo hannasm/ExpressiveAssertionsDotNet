@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <DefineConstants>$(DefineConstants);EXPRESSIVE_ASSERTIONS_ASSEMBLY</DefineConstants>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup>
     <!-- We do not use the auto-generated nuspec files feature, instead see build task below -->

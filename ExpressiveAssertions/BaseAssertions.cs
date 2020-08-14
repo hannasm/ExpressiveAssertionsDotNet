@@ -2,14 +2,8 @@
 using ExpressiveAssertions.ExpressionEvaluator;
 using ExpressiveAssertions.Exceptions;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
+using ExpressiveExpressionTrees;
 namespace ExpressiveAssertions
 {
     public static class BaseAssertions
@@ -95,19 +89,22 @@ namespace ExpressiveAssertions
             T1 expectedVal = default(T1); T2 actualVal = default(T2);
             EvaluatedExpressionException expectedException = null, actualException = null;
 
-            try {
-                expectedVal = assertTool.GetExpressionEvaluator().Eval(expected1);
-                expectedVals = new object[] { expectedVal };
-                expectedRefs = new[] { test.Parameters[0] };
-            } catch (Exception eError) {
-                expectedException = new EvaluatedExpressionException(expected1, eError);
-            }
+            // We are intentionally invokign the actual result first.
+            // * This is very useful when you want the FilesystemAssertionRepository to automatically create expectations for your tests 
             try {
                 actualVal = assertTool.GetExpressionEvaluator().Eval(actual1);
                 actualVals = new object[] { actualVal };
                 actualRefs = new[] { test.Parameters[1] };
             } catch (Exception eError) {
                 actualException = new EvaluatedExpressionException(actual1, eError);
+            }
+
+            try {
+                expectedVal = assertTool.GetExpressionEvaluator().Eval(expected1);
+                expectedVals = new object[] { expectedVal };
+                expectedRefs = new[] { test.Parameters[0] };
+            } catch (Exception eError) {
+                expectedException = new EvaluatedExpressionException(expected1, eError);
             }
 
             if (expectedException == null && actualException == null) {
@@ -126,13 +123,18 @@ namespace ExpressiveAssertions
               throw new InvalidOperationException("This exception should be logically impossible to reach");
             }
 
+            var finalExpression = Expression.Invoke(
+                test,
+                expected1.Body,
+                actual1.Body
+            );
             if (!result)
             {
-                assertTool.Accept(new AssertionFailure(test.Body, expectedRefs, expectedVals, actualRefs, actualVals, message, fmt, exc, internalError, assertTool.ContextGetData()));
+                assertTool.Accept(new AssertionFailure(finalExpression, expectedRefs, expectedVals, actualRefs, actualVals, message, fmt, exc, internalError, assertTool.ContextGetData()));
             }
             else
             {
-                assertTool.Accept(new AssertionSuccess(test.Body, expectedRefs, expectedVals, actualRefs, actualVals, message, fmt, exc, internalError, assertTool.ContextGetData()));
+                assertTool.Accept(new AssertionSuccess(finalExpression, expectedRefs, expectedVals, actualRefs, actualVals, message, fmt, exc, internalError, assertTool.ContextGetData()));
             }
         }
     }

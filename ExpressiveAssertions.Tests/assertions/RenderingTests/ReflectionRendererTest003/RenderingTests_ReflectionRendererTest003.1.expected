@@ -1,0 +1,7 @@
+
+AssertionFailure new Func<KeyValuePair<string, string>[], KeyValuePair<string, string>[], bool>((a, b) => object.Equals(a, b))(v_01.expected, v_02.actual)
+ with a = [KeyValuePair<string, string>[]]@([KeyValuePair<string, string>]@{"Key"=[string]"hello";"Value"=[string]"world";})
+ and b = [KeyValuePair<string, string>[]]@([KeyValuePair<string, string>]@{"Key"=[string]"hello";"Value"=[string]"world";})
+ and v_01.expected = [KeyValuePair<string, string>[]]@([KeyValuePair<string, string>]@{"Key"=[string]"hello";"Value"=[string]"world";})
+ and v_02.actual = [KeyValuePair<string, string>[]]@([KeyValuePair<string, string>]@{"Key"=[string]"hello";"Value"=[string]"world";}).
+ Message: ~null~

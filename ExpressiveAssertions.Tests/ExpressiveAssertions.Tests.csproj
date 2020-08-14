@@ -4,7 +4,7 @@
     <ProjectReference Include="..\ExpressiveAssertions.MSTest\ExpressiveAssertions.MSTest.csproj" />
   </ItemGroup>
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>False</IsPackable>
   </PropertyGroup>
   <ItemGroup>

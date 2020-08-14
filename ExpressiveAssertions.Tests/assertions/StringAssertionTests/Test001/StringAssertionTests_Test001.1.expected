@@ -1,0 +1,7 @@
+
+AssertionFailure new Func<string, string, bool>((a, b) => a == b)(v_01.expected, v_02.actual)
+ with a = [string]"a"
+ and b = [string]"a\0"
+ and v_01.expected = [string]"a"
+ and v_02.actual = [string]"a\0".
+ Message: ~null~

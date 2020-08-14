@@ -1,3 +1,8 @@
+    * 0.10.0 - massive rewrite of rendering engine
+    * 0.10.0 - new EachIsDistinct() assertion
+    * 0.10.0 - project upgraded to netstandard 2.1 in order to utilize some coonvenience methods like HashSet.TryGetValue() and ConditionalWeakTable.AddOrUpdate()
+    * 0.10.0 - new NullAssertionTool is a black hole for assertion data
+    * 0.10.0 - new FilesystemAssertionTool implements all the stuff needed to move your assertion expectations to separate files on disk
     * 0.9.9 - rendering code was excluding  thrown exception details from the assertion failure messages
     * 0.9.9 - added a little more robust handling for exceptions to help pinpoint where the exception is ocurring.
     * 0.9.8 - upgrade to netstandard 2.0 

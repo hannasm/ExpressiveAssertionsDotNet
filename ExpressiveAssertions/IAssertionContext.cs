@@ -11,7 +11,8 @@ namespace ExpressiveAssertions
         IDisposable Push();
         void Pop();
 
-        IEnumerable<KeyValuePair<string, string>> GetData();
+        IEnumerable<ContextItem> GetData();
+        ContextItem GetData(string key);
         void Set(string key, string value);
     }
 }

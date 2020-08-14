@@ -1,4 +1,5 @@
 ﻿using ExpressiveAssertions.Exceptions;
+using ExpressiveAssertions.Tooling;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace ExpressiveAssertions.Tests
     [TestClass]
     public class AssertionContextTests
     {
-        IAssertionTool assert = ExpressiveAssertions.MSTest.MSTestAssertionTool.Create();
+        IAssertionTool assert = AssertionRendererTool.Create(ExpressiveAssertions.MSTest.MSTestAssertionTool.Create());
 
         [TestMethod]
         public void Test001()
@@ -38,12 +39,14 @@ namespace ExpressiveAssertions.Tests
             assert.AreEqual(1, () => values.Count());
             assert.AreEqual(new
             {
-                Key = "Depth 0 - abc",
-                Value = "def"
+                Key = "abc",
+                Value = "def",
+                Depth = 0
             }, () => values.Select(kvp => new
             {
                 Key = kvp.Key,
-                Value = kvp.Value
+                Value = kvp.Value,
+                Depth = kvp.Depth
             }).Single());
 
             ac.Set("abc", "ghi");
@@ -52,12 +55,14 @@ namespace ExpressiveAssertions.Tests
             assert.AreEqual(1, () => values2.Count());
             assert.AreEqual(new
             {
-                Key = "Depth 0 - abc",
-                Value = "ghi"
+                Key = "abc",
+                Value = "ghi",
+                Depth = 0
             }, () => values2.Select(kvp => new
             {
                 Key = kvp.Key,
-                Value = kvp.Value
+                Value = kvp.Value,
+                Depth = kvp.Depth
             }).Single());
         }
 
@@ -78,16 +83,19 @@ namespace ExpressiveAssertions.Tests
                 assert.EveryUnsorted((new[] {
                         new
                         {
-                            Key = "Depth 0 - abc",
-                            Value = "def"
+                            Key = "abc",
+                            Value = "def",
+                            Depth = 0
                         }, new {
-                            Key = "Depth 1 - ghi",
-                            Value = "jkl"
+                            Key = "ghi",
+                            Value = "jkl",
+                            Depth = 1,
                         }
                 }).AsEnumerable(), () => values.Select(kvp => new
                 {
                     Key = kvp.Key,
-                    Value = kvp.Value
+                    Value = kvp.Value,
+                    Depth = kvp.Depth
                 }).AsEnumerable(), (t, a, b) => t.AreEqual(a, b));
             }
 
@@ -99,13 +107,15 @@ namespace ExpressiveAssertions.Tests
             assert.EveryUnsorted((new[] {
                         new
                         {
-                            Key = "Depth 0 - abc",
-                            Value = "def"
+                            Key = "abc",
+                            Value = "def",
+                            Depth = 0
                         }
                 }).AsEnumerable(), () => values2.Select(kvp => new
                 {
                     Key = kvp.Key,
-                    Value = kvp.Value
+                    Value = kvp.Value,
+                    Depth = kvp.Depth
                 }).AsEnumerable(), (t, a, b) => t.AreEqual(a, b));
         }
 
@@ -138,19 +148,23 @@ namespace ExpressiveAssertions.Tests
                 assert.EveryUnsorted((new[] {
                         new
                         {
-                            Key = "Depth 0 - abc",
-                            Value = "def"
+                            Key = "abc",
+                            Value = "def",
+                            Depth = 0,
                         }, new {
-                            Key = "Depth 1 - ghi",
-                            Value = "jkl"
+                            Key = "ghi",
+                            Value = "jkl",
+                            Depth = 1,
                         }, new {
-                            Key = "Depth 2 - mno",
-                            Value = "pqr"
+                            Key = "mno",
+                            Value = "pqr",
+                            Depth = 2
                         }
                 }).AsEnumerable(), () => values.Select(kvp => new
                 {
                     Key = kvp.Key,
-                    Value = kvp.Value
+                    Value = kvp.Value,
+                    Depth = kvp.Depth
                 }).AsEnumerable(), (t, a, b) => t.AreEqual(a, b));
 
                 // in this test, we intentionally are not disposing s2 at this point so that when we dispose s1, we can exercise the 'multi-level-rollback functionality
@@ -165,13 +179,15 @@ namespace ExpressiveAssertions.Tests
             assert.EveryUnsorted((new[] {
                         new
                         {
-                            Key = "Depth 0 - abc",
-                            Value = "def"
+                            Key = "abc",
+                            Value = "def",
+                            Depth = 0
                         }
                 }).AsEnumerable(), () => values2.Select(kvp => new
                 {
                     Key = kvp.Key,
-                    Value = kvp.Value
+                    Value = kvp.Value,
+                    Depth = kvp.Depth
                 }).AsEnumerable(), (t, a, b) => t.AreEqual(a, b));
         }
 

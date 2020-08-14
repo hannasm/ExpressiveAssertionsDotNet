@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExpressiveAssertions
 {
@@ -39,7 +36,11 @@ namespace ExpressiveAssertions
             _CONTEXT.Add(assertTool, ctx);
             return assertTool;
         }
-        public static IEnumerable<KeyValuePair<string, string>> ContextGetData(this IAssertionTool assertTool) { return ContextGet(assertTool).GetData(); }
+        public static IEnumerable<ContextItem> ContextGetData(this IAssertionTool assertTool) { return ContextGet(assertTool).GetData(); }
+        public static ContextItem ContextGetData(this IAssertionTool assertTool, string key) { 
+          var ctx = ContextGet(assertTool);
+          return ctx.GetData(key);
+        }
 
     }
 }

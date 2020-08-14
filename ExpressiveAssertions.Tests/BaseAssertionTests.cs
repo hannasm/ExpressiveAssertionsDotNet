@@ -1,9 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Threading;
 
 namespace ExpressiveAssertions.Tests
 {
@@ -11,7 +9,7 @@ namespace ExpressiveAssertions.Tests
     public class BaseAssertionTests
     {
         IntrospectiveAssertionTool _assert;
-
+        
         [TestInitialize]
         public virtual void Init()
         {
@@ -196,6 +194,32 @@ namespace ExpressiveAssertions.Tests
         {
             _assert.ExpectAssertionSuccessNext();
             _assert.Check(() => true, () => false, (l, r) => true);
+            _assert.NoneOutstanding();
+        }
+
+        
+        [TestMethod]
+        public void Test031()
+        {
+            _assert.ExpectAssertionFailureNext();
+            _assert.Check(()=>10, () => 20, (x, y) => x == y, null, "Test");
+            _assert.NoneOutstanding();
+        }
+
+        [TestMethod]
+        public void Test032()
+        {
+            _assert.ExpectAssertionFailureNext();
+            _assert.Check(()=> 10 == 20, null, "Test");
+            _assert.NoneOutstanding();
+        }
+        [TestMethod]
+        public void Test033()
+        {
+            int i = 10;
+            int j = 20;
+            _assert.ExpectAssertionFailureNext();
+            _assert.Check(() => i == j, null, "Test");
             _assert.NoneOutstanding();
         }
     }

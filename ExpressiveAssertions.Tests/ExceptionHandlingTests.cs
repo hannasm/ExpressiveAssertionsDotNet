@@ -8,18 +8,27 @@ using System.Threading.Tasks;
 namespace ExpressiveAssertions.Tests
 {
     [TestClass]
-    public class ExceptionHandlingTests
-    {
-        IAssertionTool assert = ExpressiveAssertions.Tooling.ShortAssertionRendererTool.Create(
-            ExpressiveAssertions.MSTest.MSTestAssertionTool.Create()
-        );
-    
+    public class ExceptionHandlingTests : ExpressiveAssertionsFilesystemBackedTestBase
+    {    
+        [TestInitialize]
+        public override void Init() {
+            base.Init();
+
+            //ConfigureAutoAccept();
+        }
+        
         [TestMethod]
         public void Test001()
         {
             string value1 = null;
 
-            assert.AreEqual(()=>"not null".ToUpper(), ()=>value1.ToUpper());
+            _introspective.ExpectAssertionFailureNext((a,d)=>{
+                var expectedResult = _assert.ExpectationFromDisk<string>();
+                var actualResult = _assert.ActualToDisk(d.Message);
+                a.AreEqual(expectedResult, actualResult);
+            });
+      
+            _assert.AreEqual(()=>"not null".ToUpper(), ()=>value1.ToUpper());
         }
 
         [TestMethod]
@@ -28,7 +37,12 @@ namespace ExpressiveAssertions.Tests
             string value1 = null;
             string value2 = null;
 
-            assert.AreEqual(()=>value1.ToUpper(), ()=>value2.ToUpper());
+            _introspective.ExpectAssertionFailureNext((a,d)=>{
+                var expectedResult = _assert.ExpectationFromDisk<string>();
+                var actualResult = _assert.ActualToDisk(d.Message);
+                a.AreEqual(expectedResult, actualResult);
+            });
+            _assert.AreEqual(()=>value1.ToUpper(), ()=>value2.ToUpper());
         }
     }
 }

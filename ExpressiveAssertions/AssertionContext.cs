@@ -1,10 +1,7 @@
 ﻿using ExpressiveAssertions.Exceptions;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExpressiveAssertions
 {
@@ -59,18 +56,31 @@ namespace ExpressiveAssertions
 
             public static Comparer INSTANCE = new Comparer();
         }
-        public IEnumerable<KeyValuePair<string, string>> GetData()
+        public IEnumerable<ContextItem> GetData()
         {
-            var result = new List<KeyValuePair<string, string>>();
-            var cnt = _data.Count;
-            foreach (var ele in _data.Select((e,i)=>new { e, i }))
+            var result = new List<ContextItem>();
+            var depth = _data.Count;
+            foreach (var ele in _data)
             {
-                foreach (var item in ele.e)
-                {
-                    result.Add(new KeyValuePair<string, string>("Depth " + (cnt - 1 - ele.i) + " - " + item.Key, item.Value));
-                }
+              depth--;
+              foreach (var item in ele)
+              {
+                  result.Add(new ContextItem(depth, item.Key, item.Value));
+              }
             }
             return result;
+        }
+        public ContextItem GetData(string key) {
+          var pair = new KeyValuePair<string,string>(key,key);
+
+          var depth = _data.Count;
+          foreach (var hash in _data) {
+            depth--;
+            if (hash.TryGetValue(pair, out var result)) {
+              return new ContextItem(depth, result.Key, result.Value);
+            }
+          }
+          return null;
         }
 
         public void Pop()
@@ -112,6 +122,19 @@ namespace ExpressiveAssertions
 
             if (top.Contains(rec)) { top.Remove(rec); }
             top.Add(rec);
+        }
+    }
+
+    public class ContextItem {
+      public readonly int Depth;
+      public readonly string Key;
+      public readonly string Value;
+
+        public ContextItem(int depth, string key, string value)
+        {
+            Depth = depth;
+            Key = key;
+            Value = value;
         }
     }
 }
