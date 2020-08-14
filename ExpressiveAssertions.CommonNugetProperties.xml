@@ -4,4 +4,4 @@
     <projectUrl>https://github.com/hannasm/ExpressiveAssertionsDotnet</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Flexible assertion library leveraging the .NET expression tree syntax</description>
-    <copyright>Copyright 2015-2018</copyright>
+    <copyright>Copyright 2015-2020</copyright>
