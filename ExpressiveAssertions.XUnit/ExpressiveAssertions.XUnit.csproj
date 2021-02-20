@@ -2,17 +2,18 @@
   <PropertyGroup>
     <DefineConstants>$(DefineConstants);EXPRESSIVE_ASSERTIONS_ASSEMBLY</DefineConstants>
     <TargetFrameworks>netstandard2.1</TargetFrameworks>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
   <PropertyGroup>
     <!-- We do not use the auto-generated nuspec files feature, instead see build task below -->
-    <NuspecFile>ExpressiveAssertions.nuspec</NuspecFile>
+    <NuspecFile>ExpressiveAssertions.XUnit.nuspec</NuspecFile>
   </PropertyGroup>
   <PropertyGroup>
     <!-- We do use the auto-generated assembly info, but version number is pulled in from GetProjectProps build task below -->
-    <AssemblyTitle>ExpressiveAssertions</AssemblyTitle>
-    <AssemblyProduct>ExpressiveAssertions</AssemblyProduct>
+    <AssemblyTitle>ExpressiveAssertions.XUnit</AssemblyTitle>
+    <AssemblyProduct>ExpressiveAssertions.XUnit</AssemblyProduct>
     <Company>Resonance Development</Company>
-    <Description>Flexible assertion library leveraging the .NET expression tree syntax</Description>
+    <Description>XUnit Driver for ExpressiveAssertions, a Flexible assertion library leveraging the .NET expression tree syntax</Description>
   </PropertyGroup>
   <!-- load version number and populate properties needed for generating assemblyInfo and nuspec -->
   <Target Name="GetProjectProps" BeforeTargets="GetAssemblyVersion">
@@ -28,37 +29,12 @@
     </PropertyGroup>
     <Message Text="... Generated Assembly Version $(Version)" Importance="High" />
   </Target>
-  <ItemGroup>
-    <T4TemplatesWOMD Include="**\*.tt" />
-		<LocateT4Engines Include="$(NugetPackageRoot)**\*TextTransform.exe" />
-  </ItemGroup>
-	<Target Name="T4TransformMetadata" BeforeTargets="T4Transforms">
-		<CreateItem Include="@(T4TemplatesWOMD)" AdditionalMetadata="GeneratedFile=%(RelativeDir)%(Filename).cs">
-			<Output TaskParameter="Include" ItemName="T4Templates" />
-		</CreateItem>
-	</Target>
-	<Target Name="T4Transforms" BeforeTargets="BeforeBuild;BeforeRebuild" Inputs="@(T4Templates)" Outputs="@(T4Templates->'%(GeneratedFile)')">
-			<!--<Target Name="T4Transforms" BeforeTargets="BeforeBuild;BeforeRebuild">-->
-		<PropertyGroup>
-			<T4Engine>$(NugetPackageRoot)mono.texttemplating/1.3.1/tools/TextTransform.exe</T4Engine>
-		</PropertyGroup>
-		<ItemGroup>
-			<InvokeT4Engine Include="@(T4Templates -> '&quot;$(T4Engine)&quot; %(Identity) -o %(GeneratedFile)')" />
-		</ItemGroup>
-		<Message Importance="low" Text="Nuget path: $(NugetPackageRoot)" />
-		<Message Importance="low" Text="Detect the following mono.texttemplating exes: @(LocateT4Engines)" />
-		<Message Importance="high" Text="Inputs are: @(T4Templates)" />
-		<Message Importance="high" Text="Outputs are: @(T4Templates->'%(GeneratedFile)')" />
-		<Message Importance="high" Text="Invoking Mono.TextTemplatingat path: $(T4Engine)" />
-		<Message Importance="high" Text="%(InvokeT4Engine.Identity)" />
-		<Exec Command="%(InvokeT4Engine.Identity)" />
-  </Target>
   <Target Name="GeneratePPs" BeforeTargets="Build">
     <Message Text="... Generating Nuspec" Importance="High" />
-    <ReadLinesFromFile File="ExpressiveAssertions.nuspec.header">
+    <ReadLinesFromFile File="ExpressiveAssertions.XUnit.nuspec.header">
       <Output TaskParameter="Lines" ItemName="NuspecHeader" />
     </ReadLinesFromFile>
-    <ReadLinesFromFile File="ExpressiveAssertions.nuspec.footer">
+    <ReadLinesFromFile File="ExpressiveAssertions.XUnit.nuspec.footer">
       <Output TaskParameter="Lines" ItemName="NuspecFooter" />
     </ReadLinesFromFile>
     <ReadLinesFromFile File="../ExpressiveAssertions.VersionNumber.md">
@@ -88,24 +64,27 @@
     <CreateProperty Value="&lt;/releaseNotes&gt;">
       <Output TaskParameter="Value" PropertyName="NuspecReleaseNotesSuffix" />
     </CreateProperty>
-    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="@(NuspecHeader)" Overwrite="true" Encoding="UTF-8" />
-    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="@(NuspecCommonProperties)" Overwrite="false" Encoding="UTF-8" />
-    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="$(NuspecVersionPrefix)" Overwrite="false" Encoding="UTF-8" />
-    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="@(CommonVersion)" Overwrite="false" Encoding="UTF-8" />
-    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="$(NuspecVersionSuffix)" Overwrite="false" Encoding="UTF-8" />
-    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="$(NuspecReleaseNotesPrefix)" Overwrite="false" Encoding="UTF-8" />
-    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="$(CommonReleaseNotesEncoded)" Overwrite="false" Encoding="UTF-8" />
-    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="$(NuspecReleaseNotesSuffix)" Overwrite="false" Encoding="UTF-8" />
-    <WriteLinesToFile File="ExpressiveAssertions.nuspec" Lines="@(NuspecFooter)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.XUnit.nuspec" Lines="@(NuspecHeader)" Overwrite="true" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.XUnit.nuspec" Lines="@(NuspecCommonProperties)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.XUnit.nuspec" Lines="$(NuspecVersionPrefix)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.XUnit.nuspec" Lines="@(CommonVersion)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.XUnit.nuspec" Lines="$(NuspecVersionSuffix)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.XUnit.nuspec" Lines="$(NuspecReleaseNotesPrefix)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.XUnit.nuspec" Lines="$(CommonReleaseNotesEncoded)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.XUnit.nuspec" Lines="$(NuspecReleaseNotesSuffix)" Overwrite="false" Encoding="UTF-8" />
+    <WriteLinesToFile File="ExpressiveAssertions.XUnit.nuspec" Lines="@(NuspecFooter)" Overwrite="false" Encoding="UTF-8" />
     <Message Text="... Generated Nuspec" Importance="High" />
   </Target>
   <ItemGroup>
-    <None Include="ExpressiveAssertions.nuspec" />
+    <None Include="ExpressiveAssertions.XUnit.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ExpressionToCodeLib" Version="3.3.0" />
     <PackageReference Include="ExpressiveExpressionTrees" Version="2.0.0" />
     <PackageReference Include="ExpressiveReflection" Version="2.0.1" />
-    <PackageReference Include="Mono.TextTemplating" Version="1.3.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExpressiveAssertions\ExpressiveAssertions.csproj" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
-<package >
+<package>
 <metadata>
-<id>ExpressiveAssertions</id>
+<id>ExpressiveAssertions.XUnit</id>
 <authors>hannasm</authors>
 <owners>hannasm</owners>
 <licenseUrl>https://github.com/hannasm/ExpressiveAssertionsDotnet/blob/master/LICENSE.md</licenseUrl>
@@ -50,19 +50,17 @@
 * 0.9.0 - this is the initial release, and is a beta / alpha version with some incomplete / missing features
 </releaseNotes>
 <dependencies>
-<group targetFramework=".NETStandard2.0">
-<dependency id="ExpressionToCodeLib" version="(3.0,4.0)" />
-<dependency id="ExpressiveExpressionTrees" version="[2.0,3.0)" />
-<dependency id="ExpressiveReflection" version="[2.0,3.0)" />
+<group>
+<dependency id="ExpressiveAssertions" version="[0.9,1.0)" />
+<dependency id="XUnit" version="[2.0,3.0)" />
 </group>
 </dependencies>
 </metadata>
 <files>
-<file src="../readme.md" target="content/README_ExpressiveAssertions.md" />
-<file src="../LICENSE.md" target="content/LICENSE_ExpressiveAssertions.md" />
-<file src="bin/Release/netstandard2.1/*.dll" target="lib/netstandard2.1" />
-<file src="bin/Release/netstandard2.1/*.pdb" target="lib/netstandard2.1" />
-<file src="bin/Release/netstandard2.1/*.xml" target="lib/netstandard2.1" />
+<file src="../readme.md" target="content/README_ExpressiveAssertionsXUnit.md" />
+<file src="../LICENSE.md" target="content/LICENSE_ExpressiveAssertionsXUnit.md" />
+<file src="bin/Release/netstandard2.1/ExpressiveAssertions.XUnit.dll" target="lib/netstandard2.1" />
+<file src="bin/Release/netstandard2.1/ExpressiveAssertions.XUnit.pdb" target="lib/netstandard2.1" />
 </files>
 </package>
 <!-- vim: set expandtab ts=2 sw=2:  -->

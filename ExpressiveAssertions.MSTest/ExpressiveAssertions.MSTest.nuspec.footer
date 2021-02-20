@@ -1,7 +1,7 @@
    <dependencies>
       <group>
-        <dependency id="ExpressiveAssertions" version="0.9.8" />
-        <dependency id="MSTest.TestFramework" version="[1.0,2.0)" />
+        <dependency id="ExpressiveAssertions" version="[0.9, 1.0)" />
+        <dependency id="MSTest.TestFramework" version="[1.0,3.0)" />
       </group>
     </dependencies>
   </metadata>

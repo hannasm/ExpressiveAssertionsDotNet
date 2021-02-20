@@ -1,9 +1,9 @@
 # Versioning
-This is version 0.10.0 of the expressive assertions library
+This is version 0.11.0 of the expressive assertions library
 
-This package is available from nuget at: https://www.nuget.org/packages/ExpressiveAssertions/0.10.0
+This package is available from nuget at: https://www.nuget.org/packages/ExpressiveAssertions/0.11.0
 
-The source for this release is available on github at: https://github.com/hannasm/ExpressiveAssertionsDotNet/releases/tag/0.10.0
+The source for this release is available on github at: https://github.com/hannasm/ExpressiveAssertionsDotNet/releases/tag/0.11.0
 
 # Definitions
 
@@ -42,6 +42,7 @@ This library provides first class support for offloading unit test expectations 
 The following native unit testing framwork implementations are currently implemented:
 
 * MSTest via ExpressiveAssertions.MSTest - ExpressiveAssertions.MSTest.MSTestAssertionTool
+* XUnit via ExpressiveAssertions.XUnit - ExpressiveAssertions.XUnit.XUnitTestAssertionTool
 
 *(more are welcome, please contribute)*
 

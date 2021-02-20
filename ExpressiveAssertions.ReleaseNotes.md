@@ -1,3 +1,5 @@
+    * 0.11.0 - update dependency versions
+    * 0.11.0 - add new xunit assertion implementation 
     * 0.10.0 - massive rewrite of rendering engine
     * 0.10.0 - new EachIsDistinct() assertion
     * 0.10.0 - project upgraded to netstandard 2.1 in order to utilize some coonvenience methods like HashSet.TryGetValue() and ConditionalWeakTable.AddOrUpdate()
